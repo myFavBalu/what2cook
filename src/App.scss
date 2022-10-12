@@ -6,9 +6,9 @@
   width: 100%;
   background: $color-background;
   overflow: hidden;
+  display: block;
 
-  .Content{
+  .Content {
     margin: 0 25px 0 25px;
-    display: flex;
   }
 }

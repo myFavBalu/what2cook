@@ -7,7 +7,6 @@ function App() {
         <div className="App">
             <div className={"Content"}>
                 <Navigation/>
-
             </div>
         </div>
     );
