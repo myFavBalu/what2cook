@@ -1,0 +1,35 @@
+@import "../variables";
+
+.NavigationWrapper {
+  background: $color-component;
+  display: flex;
+  width: 100%;
+  height: 50px;
+  padding: 0 25px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+
+  .PageName {
+    font-size: 25px;
+    font-family: Bahnschrift sans-serif;
+    margin: auto 25px auto 0;
+    color: #fff;
+  }
+
+  .NavigationElement {
+    height: 50%;
+    color: $color-headline;
+    font-family: Verdana sans-serif;
+    font-size: 18px;
+    margin: auto 15px auto 0;
+    transition: color 0.5s;
+  }
+
+  .NavigationElement:hover {
+    color: $color-headline-hover;
+  }
+
+  .NavigationElement:last-of-type {
+    margin-right: 0;
+  }
+}
