@@ -1,7 +1,7 @@
 #!/bin/sh
 
 echo "building project"
-cd ..
+cd ../
 yarn build
 
 echo "copy to server"
