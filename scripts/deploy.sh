@@ -1,2 +1,10 @@
 #!/bin/sh
-scp -r build/ what2cook:/var/www/html
+
+echo "building project"
+cd ..
+yarn build
+
+echo "copy to server"
+scp -r build what2cook:/var/www/html
+
+echo "finished!"
