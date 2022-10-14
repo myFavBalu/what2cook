@@ -21,5 +21,14 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-/vendor/
 /composer.phar
+.idea
+
+
+/backend_src/.env.local
+/backend_src/.env.local.php
+/backend_src/.env.*.local
+/backend_src/config/secrets/prod/prod.decrypt.private.php
+/backend_src/public/bundles/
+/backend_src/var/
+/backend_src/vendor/
