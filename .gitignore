@@ -32,3 +32,4 @@ yarn-error.log*
 /backend_src/public/bundles/
 /backend_src/var/
 /backend_src/vendor/
+/backend_src/
