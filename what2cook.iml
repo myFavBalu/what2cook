@@ -8,6 +8,8 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor" />
       <excludeFolder url="file://$MODULE_DIR$/backend_src/vendor" />
       <excludeFolder url="file://$MODULE_DIR$/backend_src/var" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/var" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/vendor" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
