@@ -25,7 +25,9 @@
     "eject": "react-scripts eject",
     "deploy": "cd scripts && bash deploy_full.sh",
     "deploy_config": "cd scripts && bash deploy_config.sh",
-    "deploy_build": "cd scripts && bash deploy_build.sh"
+    "deploy_build": "cd scripts && bash deploy_build.sh",
+    "create_migration": "cd scripts && bash create_migrations.sh",
+    "migrate": "cd scripts && bash db_migrate.sh"
   },
   "eslintConfig": {
     "extends": [

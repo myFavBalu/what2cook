@@ -9,3 +9,7 @@ template_page:
 template_json:
     path: /template/json
     controller: App\Controller\TemplateController::templateJson
+
+recipe_random:
+    path: /recipe
+    controller: App\Controller\RecipeController::getRecipe

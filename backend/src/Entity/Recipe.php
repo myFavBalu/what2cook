@@ -6,6 +6,7 @@ use App\Repository\RecipeRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use http\Exception;
+use JetBrains\PhpStorm\ArrayShape;
 
 #[ORM\Entity(repositoryClass: RecipeRepository::class)]
 class Recipe
@@ -18,14 +19,14 @@ class Recipe
     #[ORM\Column(length: 255)]
     private string $name;
 
-    #[ORM\Column(type: Types::ARRAY)]
-    private array $ingredients = [];
+    #[ORM\Column(length: 999999)]
+    private string $ingredients;
 
     #[ORM\Column(length: 999999)]
     private string $instructions;
 
     #[ORM\Column]
-    private bool $vegetarian;
+    private bool $vegetarian = true;
 
     public function getId(): int
     {
@@ -42,12 +43,12 @@ class Recipe
         $this->name = $name;
     }
 
-    public function getIngredients(): array
+    public function getIngredients(): string
     {
         return $this->ingredients;
     }
 
-    public function setIngredients(array $ingredients): void
+    public function setIngredients(string $ingredients): void
     {
         $this->ingredients = $ingredients;
     }
@@ -70,5 +71,17 @@ class Recipe
     public function setVegetarian(bool $vegetarian): void
     {
         $this->vegetarian = $vegetarian;
+    }
+
+    #[ArrayShape(['id' => "int", 'name' => "string", 'ingredients' => "string", 'instructions' => "string", 'vegetarian' => "bool"])]
+    public function jsonSerialize(): array
+    {
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'ingredients' => $this->ingredients,
+            'instructions' => $this->instructions,
+            'vegetarian' => $this->vegetarian,
+        ];
     }
 }
