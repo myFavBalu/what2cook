@@ -1,3 +1,11 @@
 controllers:
     resource: ../src/Controller/
     type: attribute
+
+template_page:
+    path: /template/page
+    controller: App\Controller\TemplateController::templatePage
+
+template_json:
+    path: /template/json
+    controller: App\Controller\TemplateController::templateJson
