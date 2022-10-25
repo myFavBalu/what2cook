@@ -29,5 +29,6 @@ yarn-error.log*
 /backend/.env.*.local
 /backend/config/secrets/prod/prod.decrypt.private.php
 /backend/public/bundles/
-/backend/var/
+/backend/var/cache
+/backend/var/log
 /backend/vendor/
