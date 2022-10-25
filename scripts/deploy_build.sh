@@ -4,7 +4,7 @@ echo "building project"
 cd ../
 yarn build
 
-echo "copy to server"
+echo "copying build to server"
 scp -r build what2cook:/var/www/html
 
-echo "finished!"
+echo "finished deploying build!"
