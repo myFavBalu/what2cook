@@ -1,7 +1,9 @@
 #!/bin/sh
 
-echo " \033[0;104mncopy config to server\033[97;40m"
+source config.sh
+
+echo "${info}copy config to server${default}"
 cd ../
 scp -r serverconfig/nginx what2cook:/etc
 
-echo "finished deploying config!"
+echo "${success}finished deploying config!"

@@ -1,10 +1,12 @@
 #!/bin/sh
 
-echo "building project"
+source config.sh
+
+echo "${info}building project${default}"
 cd ../
 yarn build
 
-echo "copying build to server"
+echo "${info}copying build to server${default}"
 scp -r build what2cook:/var/www/html
 
-echo "finished deploying build!"
+echo "${success}finished deploying build!"

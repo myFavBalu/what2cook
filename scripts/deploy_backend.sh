@@ -1,6 +1,8 @@
 #!/bin/sh
 
-echo "copying backend to server"
+source config.sh
+
+echo "${info}copying full backend to server${default}"
 scp -r backend what2cook:/var/www/html
 
-echo "finished deploying backend!"
+echo "${success}finished deploying backend!"

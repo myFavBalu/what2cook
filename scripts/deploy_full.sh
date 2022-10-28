@@ -1,17 +1,19 @@
 #!/bin/sh
 
+source config.sh
+
 cd ../
 
-echo "copying config to server"
+echo "${info}copying config to server${default}"
 scp -r serverconfig/nginx what2cook:/etc
 
-echo "building project"
+echo "${info}building project${default}"
 yarn build
 
-echo "copying build to server"
+echo "${info}copying build to server${default}"
 scp -r build what2cook:/var/www/html
 
-echo "copying backend to server"
+echo "${info}copying backend to server${default}"
 scp -r backend what2cook:/var/www/html
 
-echo "finished deploying everything!"
+echo "${success}finished deploying everything!"
