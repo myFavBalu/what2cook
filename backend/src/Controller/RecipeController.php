@@ -2,6 +2,9 @@
 
 namespace App\Controller;
 
+// @todo: einschränken
+header("Access-Control-Allow-Origin: *");
+
 use App\Service\RecipeService;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
