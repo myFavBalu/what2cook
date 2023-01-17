@@ -13,4 +13,4 @@ scp -r backend/src/Entity what2cook:/var/www/html/backend/src/Entity
 echo "${info}copying Repositories${default}"
 scp -r backend/src/Repository what2cook:/var/www/html/backend/src/Repository
 
-echo "${success}finished deploying (partial) backend!"
+echo "${success}finished deploying (partial) backend!${default}"

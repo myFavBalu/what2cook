@@ -16,4 +16,4 @@ scp -r build what2cook:/var/www/html
 echo "${info}copying backend to server${default}"
 scp -r backend what2cook:/var/www/html
 
-echo "${success}finished deploying everything!"
+echo "${success}finished deploying everything!${default}"

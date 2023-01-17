@@ -1,4 +1,4 @@
-info="\033[1;35m"
-error="\033[0;31m"
-success="\033[0;32m"
-default="\033[0m"
+export info=$(tput setaf 4)
+export error=$(tput setaf 1)
+export success=$(tput setaf 2)
+export default=$(tput sgr0)
