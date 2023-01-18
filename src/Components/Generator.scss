@@ -42,11 +42,22 @@
   }
 }
 
-.Reroll {
+.Reroll, .FirstRoll {
   margin: 5px;
   border-radius: 5px;
   background-color: $color-border;
   border-color: $color-border;
   color: $color-headline;
-  height: 30px;
+  height: 30px; 
+}
+
+.Reroll {
+  font-size: $font-size-large;
+  width: 5%;
+  height: 5%;
+  min-width: 215px;
+  min-height: 65px;
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
 }

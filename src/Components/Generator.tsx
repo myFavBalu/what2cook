@@ -6,7 +6,7 @@ export function Generator(): JSX.Element {
     const [meal, setMeal] = useState<Meal | null>(null);
 
     if (meal === null) {
-        return <button className={"Reroll"} onClick={() => getMeal(setMeal)}>Dreh das Rad!</button>
+        return <button className={"FirstRoll"} onClick={() => getMeal(setMeal)}>Dreh das Rad!</button>
     }
 
     return renderMeal(meal, setMeal);
@@ -39,7 +39,7 @@ function renderMeal(meal: Meal, setMeal: Dispatch<SetStateAction<Meal | null>>):
         </div>
         <div className={"MealInstructions"}>
             {meal.instructions}
-            <button className={"Reroll"} onClick={() => getMeal(setMeal)}>Etwas anderes!</button>
         </div>
+        <button className={"Reroll"} onClick={() => getMeal(setMeal)}>Etwas anderes!</button>
     </div>
 }
