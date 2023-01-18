@@ -28,7 +28,7 @@ async function getMeal(setMeal: Dispatch<SetStateAction<Meal | null>>) {
 function renderMeal(meal: Meal, setMeal: Dispatch<SetStateAction<Meal | null>>): JSX.Element {
     const ingredients = meal.ingredients.split("-");
     const displayIngredients: Array<JSX.Element> = [];
-    ingredients.forEach((i) => displayIngredients.push(<div className={"IngredientItem"}>{i}</div>));
+    ingredients.forEach((i) => displayIngredients.push(<div className={"IngredientItem"} key={i}>{i}</div>));
     return <div className={"MealForm"}>
         <div className={"MealName"}>
             {meal.name}

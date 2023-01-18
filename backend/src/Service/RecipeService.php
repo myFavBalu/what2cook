@@ -4,6 +4,7 @@ namespace App\Service;
 
 use App\Entity\Recipe;
 use App\Repository\RecipeRepository;
+use Exception;
 
 class RecipeService
 {
@@ -24,5 +25,16 @@ class RecipeService
 
         return $this->recipeRepository->find($randomRecipeId);
     }
-}
 
+    public function addRecipe(Recipe $newRecipe): bool {
+
+        try{
+            $em = $this->recipeRepository->createQueryBuilder('recipe')->getEntityManager();
+            $em->persist($newRecipe);
+            $em->flush();
+            return true;
+        } catch(Exception $e) {
+            return false;
+        }
+    }   
+};

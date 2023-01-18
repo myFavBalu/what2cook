@@ -15,6 +15,7 @@
     font-family: Bahnschrift sans-serif;
     margin: auto 25px auto 0;
     color: #fff;
+    cursor: default;
   }
 
   .NavigationElement {
@@ -24,6 +25,7 @@
     font-size: 18px;
     margin: auto 15px auto 0;
     transition: color 0.5s;
+    cursor: pointer;
   }
 
   .NavigationElement:hover {

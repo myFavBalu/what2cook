@@ -5,8 +5,10 @@ namespace App\Controller;
 // @todo: einschränken
 header("Access-Control-Allow-Origin: *");
 
+use App\Entity\Recipe;
 use App\Service\RecipeService;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 
 class RecipeController
 {
@@ -16,8 +18,22 @@ class RecipeController
 
     public function getRecipe(): JsonResponse
     {
-        $test = $this->recipeService->getRandomRecipe();
-        return new JsonResponse($test->jsonSerialize());
+        $randomRecipe = $this->recipeService->getRandomRecipe();
+        return new JsonResponse($randomRecipe->jsonSerialize());
     }
-}
 
+
+    public function addRecipe(Request $request): JsonResponse
+    {
+        // @todo: debug & finish as soon as intelliJ is available as an IDE
+        $recipe = new Recipe(
+            $request->get('name'), 
+            $request->get('ingredients'), 
+            $request->get('instructions'), 
+            $request->get('vegetarian')
+        );
+
+        $this->recipeService->addRecipe($recipe);
+        return new JsonResponse();
+    }
+};

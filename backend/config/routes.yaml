@@ -12,4 +12,11 @@ template_json:
 
 recipe_random:
     path: /recipe
+    method: "GET"
     controller: App\Controller\RecipeController::getRecipe
+
+
+add_recipe:
+    path: /add-recipe
+    method: "POST"
+    controller: App\Controller\RecipeController::addRecipe
