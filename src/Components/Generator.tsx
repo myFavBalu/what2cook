@@ -15,8 +15,8 @@ export function Generator(): JSX.Element {
 async function getMeal(setMeal: Dispatch<SetStateAction<Meal | null>>) {
     try {
         console.log("firing request");
-        // @todo: move from local to prod (better yet, implement handling for both)
-        const response = await fetch('http://127.0.0.1:8000/recipe');
+        // @todo: move from local to prod (better yet, implement handling for both), also implement working headers
+        const response = await fetch('http://127.0.0.1:8000/recipe', {headers: {Origin: "test"}});
         const meal = await response.json() as Meal;
         setMeal(meal)
     } catch (error) {
