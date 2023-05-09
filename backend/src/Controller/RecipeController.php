@@ -22,18 +22,24 @@ class RecipeController
         return new JsonResponse($randomRecipe->jsonSerialize());
     }
 
+    public function test(): JsonResponse
+    {
+        return new JsonResponse("test");
+    }
 
     public function addRecipe(Request $request): JsonResponse
     {
         // @todo: debug & finish as soon as intelliJ is available as an IDE
         $recipe = new Recipe(
-            $request->get('name'), 
-            $request->get('ingredients'), 
-            $request->get('instructions'), 
+            $request->get('name'),
+            $request->get('ingredients'),
+            $request->get('instructions'),
             $request->get('vegetarian')
         );
 
         $this->recipeService->addRecipe($recipe);
         return new JsonResponse();
     }
-};
+}
+
+;

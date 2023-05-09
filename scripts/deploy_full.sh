@@ -2,18 +2,12 @@
 
 source config.sh
 
-cd ../
+echo "${info}Starting full deployment${default}"
 
-echo "${info}copying config to server${default}"
-scp -r serverconfig/nginx what2cook:/etc
+bash deploy_config.sh
 
-echo "${info}building project${default}"
-yarn build
+bash deploy_build.sh
 
-echo "${info}copying build to server${default}"
-scp -r build what2cook:/var/www/html
-
-echo "${info}copying backend to server${default}"
-scp -r backend what2cook:/var/www/html
+bash deploy_backend.sh
 
 echo "${success}finished deploying everything!${default}"
