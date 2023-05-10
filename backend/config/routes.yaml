@@ -2,27 +2,13 @@ controllers:
     resource: ../src/Controller/
     type: attribute
 
-template_page:
-    path: /template/page
-    controller: App\Controller\TemplateController::templatePage
-
-template_json:
-    path: /template/json
-    controller: App\Controller\TemplateController::templateJson
-
 recipe_random:
     path: /api/recipe
     methods: "GET"
     controller: App\Controller\RecipeController::getRecipe
 
-
 add_recipe:
     path: /api/add-recipe
     methods: "POST"
     controller: App\Controller\RecipeController::addRecipe
-
-test:
-    path: /api
-    methods: "GET"
-    controller: App\Controller\RecipeController::test
 
