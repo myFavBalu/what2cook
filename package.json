@@ -20,18 +20,19 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
+    "create_migration": "cd scripts && bash create_migrations.sh",
     "deploy": "cd scripts && bash deploy_full.sh",
-    "deploy_config": "cd scripts && bash deploy_config.sh",
-    "deploy_build": "cd scripts && bash deploy_build.sh",
     "deploy_backend": "cd scripts && bash deploy_backend.sh",
     "deploy_backend_partial": "cd scripts && bash deploy_backend_partial.sh",
-    "create_migration": "cd scripts && bash create_migrations.sh",
+    "deploy_build": "cd scripts && bash deploy_build.sh",
+    "deploy_config": "cd scripts && bash deploy_config.sh",
+    "deploy_db": "cd scripts && bash deploy_database.sh",
+    "devstart": "cd scripts && bash start.sh",
+    "eject": "react-scripts eject",
     "migrate": "cd scripts && bash db_migrate.sh",
-    "devstart": "cd scripts && bash start.sh"
+    "start": "react-scripts start",
+    "test": "react-scripts test"
   },
   "eslintConfig": {
     "extends": [
