@@ -1,20 +1,10 @@
 # Getting started with what2cook
-
 ## Frontend (dev)
 
-Run `yarn start` inside the src directory.
-Runs the frontend in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
+To run the frontend in development mode, navigate to the src directory and run `yarn start`. This will open the frontend on http://localhost:3000 in your browser. The page will automatically reload as you make edits. If there are any lint errors, they will be displayed in the console.
 ## Backend (dev)
 
-Run `symfony server:start` in the backend directoy.
-Starts the symfony server for the backend in development mode.
-
+To start the Symfony server for the backend in development mode, navigate to the backend directory and run `symfony server:start`.
 ## Scripts
 
-All the important scripts for deployment etc. can be found under /scripts, they assume that you got a ssh-config for the targetserver
-for the Host "what2cook".
+All important scripts for deployment and more can be found under `/scripts`. Note that these scripts assume that you have an ssh-config for the target server with the Host "what2cook".
