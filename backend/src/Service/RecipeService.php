@@ -4,7 +4,10 @@ namespace App\Service;
 
 use App\Entity\Recipe;
 use App\Repository\RecipeRepository;
+use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\NoResultException;
 use Exception;
+use PhpParser\Node\Expr\Cast\Int_;
 
 class RecipeService
 {
@@ -12,7 +15,12 @@ class RecipeService
     {
     }
 
-    public function getRandomRecipe(): Recipe
+    /**
+     * @throws NonUniqueResultException
+     * @throws NoResultException
+     * @throws Exception
+     */
+    public function getRandomRecipe(?string $currentRecipeId): Recipe
     {
         // @todo: Exceptionhandling
         $qb = $this->recipeRepository->createQueryBuilder('recipe');
@@ -23,18 +31,26 @@ class RecipeService
 
         $randomRecipeId = random_int(1, $numberOfRecipes);
 
+        if ($currentRecipeId !== null) {
+            while ($randomRecipeId === (int) $currentRecipeId) {
+                $randomRecipeId = random_int(1, $numberOfRecipes);
+            }
+        }
+
         return $this->recipeRepository->find($randomRecipeId);
     }
 
-    public function addRecipe(Recipe $newRecipe): bool {
-
-        try{
+    public function addRecipe(Recipe $newRecipe): bool
+    {
+        try {
             $em = $this->recipeRepository->createQueryBuilder('recipe')->getEntityManager();
             $em->persist($newRecipe);
             $em->flush();
             return true;
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             return false;
         }
-    }   
-};
+    }
+}
+
+;

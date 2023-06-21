@@ -4,11 +4,11 @@ controllers:
 
 recipe_random:
     path: /api/recipe
-    methods: "GET"
+    methods: GET
     controller: App\Controller\RecipeController::getRecipe
 
 add_recipe:
     path: /api/add-recipe
-    methods: "POST"
+    methods: POST
     controller: App\Controller\RecipeController::addRecipe
 

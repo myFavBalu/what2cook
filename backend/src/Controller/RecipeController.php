@@ -7,6 +7,7 @@ header("Access-Control-Allow-Origin: *");
 
 use App\Entity\Recipe;
 use App\Service\RecipeService;
+use Exception;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -16,9 +17,15 @@ class RecipeController
     {
     }
 
-    public function getRecipe(): JsonResponse
+    public function getRecipe(Request $request): JsonResponse
     {
-        $randomRecipe = $this->recipeService->getRandomRecipe();
+        try {
+            $currentRecipeId = $request->get("currentRecipe");
+            $randomRecipe = $this->recipeService->getRandomRecipe($currentRecipeId);
+        } catch (Exception $e) {
+            return new JsonResponse($e);
+        }
+
         return new JsonResponse($randomRecipe->jsonSerialize());
     }
 

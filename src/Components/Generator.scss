@@ -5,7 +5,7 @@
   border: 2px solid $color-border;
   border-radius: 5px;
   background-color: $color-component;
-  margin: 20px 50px;
+  margin: 20px 5% 85px 5%;
 
   .MealName {
     font-size: 22px;
@@ -42,22 +42,20 @@
   }
 }
 
-.Reroll, .FirstRoll {
-  margin: 5px;
-  border-radius: 5px;
-  background-color: $color-border;
-  border-color: $color-border;
-  color: $color-headline;
-  height: 30px; 
-}
+  .Reroll, .FirstRoll {
+    margin: 5px;
+    border-radius: 5px;
+    background-color: $color-border;
+    border-color: $color-border;
+    color: $color-headline;
+    height: 30px;
+  }
 
-.Reroll {
-  font-size: $font-size-large;
-  width: 5%;
-  height: 5%;
-  min-width: 215px;
-  min-height: 65px;
-  position: absolute;
-  bottom: 20px;
-  right: 20px;
-}
+  .Reroll {
+    font-size: $font-size-large;
+    min-width: 210px;
+    min-height: 60px;
+    position: fixed;
+    bottom: 5px;
+    right: 5px;
+  }

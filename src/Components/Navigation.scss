@@ -7,8 +7,7 @@
   padding: 0 25px;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
-  overflow-x: scroll;
-  overflow-y: hidden;
+  overflow: auto;
 
   .PageName {
     font-size: 25px;
@@ -26,6 +25,7 @@
     margin: auto 15px auto 0;
     transition: color 0.5s;
     cursor: pointer;
+    white-space: nowrap;
   }
 
   .NavigationElement:hover {

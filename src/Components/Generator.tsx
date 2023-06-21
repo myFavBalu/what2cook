@@ -6,16 +6,19 @@ export function Generator(): JSX.Element {
     const [meal, setMeal] = useState<Meal | null>(null);
 
     if (meal === null) {
-        return <button className={"FirstRoll"} onClick={() => getMeal(setMeal)}>Dreh das Rad!</button>
+        return <button className={"Reroll"} onClick={() => getMeal(setMeal, meal)}>Dreh das Rad!</button>
     }
 
     return renderMeal(meal, setMeal);
 }
 
-async function getMeal(setMeal: Dispatch<SetStateAction<Meal | null>>) {
+async function getMeal(setMeal: Dispatch<SetStateAction<Meal | null>>, currentMeal: Meal | null) {
     try {
         // @todo: move from local to prod (better yet, implement handling for both), also implement working headers
-        const response = await fetch('/api/recipe', {headers: {Origin: "test"}});
+        const url = currentMeal ? 'http://127.0.0.1:8000/api/recipe?currentRecipe=' + currentMeal.id : '/api/recipe';
+        const response = await fetch(url, {
+            headers: {Origin: "test"},
+        });
         const meal = await response.json() as Meal;
         setMeal(meal)
     } catch (error) {
@@ -38,6 +41,6 @@ function renderMeal(meal: Meal, setMeal: Dispatch<SetStateAction<Meal | null>>):
         <div className={"MealInstructions"}>
             {meal.instructions}
         </div>
-        <button className={"Reroll"} onClick={() => getMeal(setMeal)}>Etwas anderes!</button>
+        <button className={"Reroll"} onClick={() => getMeal(setMeal, meal)}>Etwas anderes!</button>
     </div>
 }

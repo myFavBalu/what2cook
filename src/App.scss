@@ -1,14 +1,5 @@
 @import "variables";
 
 .App {
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  background: $color-background;
-  overflow: hidden;
-  display: block;
-
-  .Content {
-    margin: 0 25px 0 25px;
-  }
+    margin: 0 10px;
 }

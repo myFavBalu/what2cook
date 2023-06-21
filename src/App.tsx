@@ -6,10 +6,8 @@ import {Generator} from "./Components/Generator";
 function App() {
     return (
         <div className="App">
-            <div className={"Content"}>
                 <Navigation/>
                 <Generator/>
-            </div>
         </div>
     );
 }
