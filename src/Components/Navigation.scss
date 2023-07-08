@@ -8,13 +8,15 @@
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
   overflow: auto;
+  user-select: none;
 
   .PageName {
     font-size: 25px;
     font-family: Bahnschrift sans-serif;
     margin: auto 25px auto 0;
     color: #fff;
-    cursor: default;
+    cursor: pointer;
+    text-decoration: none;
   }
 
   .NavigationElement {
@@ -26,6 +28,7 @@
     transition: color 0.5s;
     cursor: pointer;
     white-space: nowrap;
+    text-decoration: none;
   }
 
   .NavigationElement:hover {

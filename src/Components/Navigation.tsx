@@ -1,9 +1,10 @@
 import "./Navigation.scss"
+import {NavLink} from "react-router-dom";
 
 export function Navigation(): JSX.Element {
     return <div className={"NavigationWrapper"}>
-        <div className={"PageName"}>what2cook</div>
-        <div className={"NavigationElement"}>Rezeptgenerator</div>
-        <div className={"NavigationElement"}>Gericht anlegen</div>
+        <NavLink className={"PageName"} to={"/"}>what2cook</NavLink>
+        <NavLink className={"NavigationElement"} to={"/generate"}>Rezeptgenerator</NavLink>
+        <NavLink className={"NavigationElement"} to={"/create"}>Gericht anlegen</NavLink>
     </div>
 }
