@@ -31,12 +31,13 @@ class RecipeController
 
     public function addRecipe(Request $request): JsonResponse
     {
-        // @todo: debug & finish as soon as intelliJ is available as an IDE
+        $bodyContent = json_decode($request->getContent(), true);
+
         $recipe = new Recipe(
-            $request->get('name'),
-            $request->get('ingredients'),
-            $request->get('instructions'),
-            $request->get('vegetarian')
+            $bodyContent["name"],
+            $bodyContent['ingredients'],
+            $bodyContent['instructions'],
+            $bodyContent['vegetarian']
         );
 
         $this->recipeService->addRecipe($recipe);

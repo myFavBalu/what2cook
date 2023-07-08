@@ -28,6 +28,20 @@ class Recipe
     #[ORM\Column]
     private bool $vegetarian = true;
 
+    /**
+     * @param string $name
+     * @param string $ingredients
+     * @param string $instructions
+     * @param bool $vegetarian
+     */
+    public function __construct(string $name, string $ingredients, string $instructions, bool $vegetarian)
+    {
+        $this->name = $name;
+        $this->ingredients = $ingredients;
+        $this->instructions = $instructions;
+        $this->vegetarian = $vegetarian;
+    }
+
     public function getId(): int
     {
         return $this->id;

@@ -1,0 +1,16 @@
+### add Recipe
+POST http://localhost:8000/api/add-recipe
+Content-Type: application/json
+
+{
+  "name": "abc",
+  "ingredients": "- 1 Kohl",
+  "instructions": "1 Kohl in 1 Topf",
+  "vegetarian": false
+}
+
+### get Recipe
+GET http://localhost:8000/api/recipe
+Accept: application/json
+
+###
