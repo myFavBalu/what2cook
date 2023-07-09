@@ -31,16 +31,22 @@ class RecipeController
 
     public function addRecipe(Request $request): JsonResponse
     {
-        $bodyContent = json_decode($request->getContent(), true);
+        try {
 
-        $recipe = new Recipe(
-            $bodyContent["name"],
-            $bodyContent['ingredients'],
-            $bodyContent['instructions'],
-            $bodyContent['vegetarian']
-        );
+            $bodyContent = json_decode($request->getContent(), true);
 
-        $this->recipeService->addRecipe($recipe);
+            $recipe = new Recipe(
+                $bodyContent["name"],
+                $bodyContent['ingredients'],
+                $bodyContent['instructions'],
+                $bodyContent['vegetarian']
+            );
+
+            $this->recipeService->addRecipe($recipe);
+        } catch (Exception $e) {
+            return new JsonResponse($e->getMessage(), 500);
+        }
+
         return new JsonResponse();
     }
 }

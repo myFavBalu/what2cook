@@ -5,3 +5,10 @@ export type Meal = {
     instructions: string,
     vegetarian: boolean
 }
+
+export type MealCreation = {
+    name: string,
+    ingredients: string[],
+    instructions: string,
+    vegetarian: boolean,
+}

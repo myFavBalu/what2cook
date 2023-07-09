@@ -1,0 +1,112 @@
+@import "../variables";
+
+Input, textarea {
+  border: none;
+  background-color: $color-component;
+  color: $color-headline;
+  width: 100%;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.MealCreationForm {
+  color: $color-headline;
+  border: 2px solid $color-border;
+  border-radius: 5px;
+  background-color: $color-component;
+  margin: 20px 5% 85px 5%;
+  padding: 5px;
+
+  .NameInputWrapper {
+    padding-bottom: 10px;
+    margin-top: 10px;
+    border-bottom: solid 2px $color-border;
+
+    .NameInput {
+      text-align: center;
+      font-size: $font-size-large;
+      text-decoration: underline $color-headline;
+    }
+  }
+
+
+  .IngredientList {
+    margin-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid $color-border;
+    font-size: $font-size-medium;
+
+    .IngredientItemWrapper {
+      padding: 5px 5px 5px 20px;
+      border-bottom: solid 1px $color-border;
+
+      .IngredientItem {
+        // todo ?
+      }
+    }
+  }
+
+  .AddNewIngredientBar {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    cursor: pointer;
+
+    .AddNewIngredientButton {
+      margin-top: 5px;
+      border-radius: 50%;
+      background-color: $color-border;
+      border-color: $color-border;
+      color: $color-headline;
+      height: 40px;
+      width: 40px;
+      font-size: 26px;
+      cursor: pointer;
+    }
+  }
+
+  .InstructionWrapper {
+    margin-top: 10px;
+    border-bottom: 2px solid $color-border;
+    font-size: $font-size-medium;
+
+    .InstructionInput {
+      display: flex;
+      resize: none;
+      width: 98%;
+      padding: 0 0 5px 20px;
+    }
+  }
+
+  .PreferencesWrapper {
+    margin-top: 10px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+    .PreferencesSelect {
+      background-color: unset;
+      border: none;
+      color: $color-headline;
+      font-weight: bold;
+    }
+  }
+
+}
+.SavingButton {
+  margin: 5px;
+  border-radius: 5px;
+  background-color: $color-border;
+  border-color: $color-border;
+  color: $color-headline;
+  height: 30px;
+  font-size: $font-size-large;
+  min-width: 210px;
+  min-height: 60px;
+  position: fixed;
+  bottom: 5px;
+  right: 5px;
+}
+

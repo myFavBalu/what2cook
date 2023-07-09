@@ -3,10 +3,10 @@ POST http://localhost:8000/api/add-recipe
 Content-Type: application/json
 
 {
-  "name": "abc",
-  "ingredients": "- 1 Kohl",
-  "instructions": "1 Kohl in 1 Topf",
-  "vegetarian": false
+  "name": "Name",
+  "ingredients": "a- b- c",
+  "instructions": "",
+  "vegetarian": true
 }
 
 ### get Recipe

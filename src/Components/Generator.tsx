@@ -1,4 +1,4 @@
-import {Meal} from "../Types/GeneratorTypes";
+import {Meal} from "../Types/MealTypes";
 import React, {Dispatch, SetStateAction, useState} from "react";
 import "./Generator.scss";
 
