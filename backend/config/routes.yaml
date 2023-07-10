@@ -12,3 +12,12 @@ add_recipe:
     methods: POST
     controller: App\Controller\RecipeController::addRecipe
 
+find_by_name:
+    path: /api/find-id-by-name
+    methods: GET
+    controller: App\Controller\RecipeController::findRecipeIdByName
+
+find_by_id:
+    path: /api/find-by-id
+    methods: GET
+    controller: App\Controller\RecipeController::findRecipeById

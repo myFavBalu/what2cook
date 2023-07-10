@@ -1,5 +1,5 @@
 ### add Recipe
-POST {{ip}}/api/add-recipe
+POST {{uri}}/api/add-recipe
 Content-Type: application/json
 
 {
@@ -10,17 +10,13 @@ Content-Type: application/json
 }
 
 ### get Recipe
-GET http://localhost:8000/api/recipe
+GET {{uri}}/api/recipe?currentRecipe=1
 Accept: application/json
 
-###
+### find Recipe by Name
+GET {{uri}}/api/find-id-by-name?searchName=Chili
+Accept: application/json
 
-POST http://185.244.195.201/api/add-recipe
-Content-Type: application/json
-
-{
-  "name": "test",
-  "ingredients": "a- b- c",
-  "instructions": "test the test",
-  "vegetarian": true
-}
+### find Recipe by id
+GET {{uri}}/api/find-by-id?recipeId=2
+Accept: application/json

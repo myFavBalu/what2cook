@@ -7,7 +7,6 @@ use App\Repository\RecipeRepository;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
 use Exception;
-use PhpParser\Node\Expr\Cast\Int_;
 
 class RecipeService
 {
@@ -20,7 +19,7 @@ class RecipeService
      * @throws NoResultException
      * @throws Exception
      */
-    public function getRandomRecipe(?string $currentRecipeId): Recipe
+    public function getRandomRecipe(?int $currentRecipeId): Recipe
     {
         // @todo: Exceptionhandling
         $qb = $this->recipeRepository->createQueryBuilder('recipe');
@@ -32,7 +31,7 @@ class RecipeService
         $randomRecipeId = random_int(1, $numberOfRecipes);
 
         if ($currentRecipeId !== null) {
-            while ($randomRecipeId === (int) $currentRecipeId) {
+            while ($randomRecipeId === (int)$currentRecipeId) {
                 $randomRecipeId = random_int(1, $numberOfRecipes);
             }
         }
@@ -47,8 +46,25 @@ class RecipeService
      */
     public function addRecipe(Recipe $newRecipe): void
     {
-            $em = $this->recipeRepository->createQueryBuilder('recipe')->getEntityManager();
-            $em->persist($newRecipe);
-            $em->flush();
+        $em = $this->recipeRepository->createQueryBuilder('recipe')->getEntityManager();
+        $em->persist($newRecipe);
+        $em->flush();
+    }
+
+    /**
+     * @param string $searchName
+     * @return array<Recipe>
+     */
+    public function findRecipeByName(string $searchName): array
+    {
+        $searchTerm = "%" . $searchName . "%";
+        $em = $this->recipeRepository->createQueryBuilder('recipe');
+        $query = $em->where("recipe.name LIKE :name")->setParameter("name", $searchTerm)->getQuery();
+        return $query->getResult();
+    }
+
+    public function findRecipeById(int $currentRecipeId): Recipe
+    {
+        return $this->recipeRepository->find($currentRecipeId);
     }
 }
