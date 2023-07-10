@@ -103,6 +103,7 @@ type InstructionProps = {
 function Instructions(props: InstructionProps) {
     return <div className={"InstructionWrapper"}>
         Zubereitung:
+        <br/>
         <textarea rows={10} className={"InstructionInput"}
                   value={props.instructions}
                   onChange={(event) => props.setInstructions(event.target.value)}/>

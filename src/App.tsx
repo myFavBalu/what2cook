@@ -11,6 +11,7 @@ function App() {
                 <Route index element={<BasePage><Generator/></BasePage>}/>
                 <Route path={"/generate"} element={<BasePage><Generator/></BasePage>}/>
                 <Route path={"/create"} element={<BasePage><AddRecipe/></BasePage>}/>
+                {/*<Route path={"/display"} element={<BasePage><Display/></BasePage>}*/}
             </Routes>
         </Router>
 

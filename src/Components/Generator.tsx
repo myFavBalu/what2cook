@@ -1,18 +1,32 @@
 import {Meal} from "../Types/MealTypes";
-import React, {Dispatch, SetStateAction, useState} from "react";
+import React, {Dispatch, SetStateAction, useEffect, useState} from "react";
 import "./Generator.scss";
+import {Display} from "./Display";
+import {useSearchParams} from "react-router-dom";
 
 export function Generator(): JSX.Element {
     const [meal, setMeal] = useState<Meal | null>(null);
+    const [queryParams] = useSearchParams();
 
+    useEffect(() => {
+        const recipeId = queryParams.get("recipeId")
+        if (recipeId) {
+            getMealById(parseInt(recipeId)).then((newMeal) => setMeal(newMeal))
+        }
+    }, [queryParams])
     if (meal === null) {
-        return <button className={"Reroll"} onClick={() => getMeal(setMeal, meal)}>Dreh das Rad!</button>
+        return <button className={"Reroll"} onClick={() => getRandomMeal(setMeal, meal)}>Dreh das Rad!</button>
     }
 
-    return renderMeal(meal, setMeal);
+    return <>
+        <Display meal={meal}/>
+        <button className={"Reroll"} onClick={() => getRandomMeal(setMeal, meal)}>Etwas anderes!</button>
+    </>
 }
 
-async function getMeal(setMeal: Dispatch<SetStateAction<Meal | null>>, currentMeal: Meal | null) {
+
+// Todo move requests to own class for reusability, also getRandomMeal should return a Meal, not set it
+async function getRandomMeal(setMeal: Dispatch<SetStateAction<Meal | null>>, currentMeal: Meal | null) {
     try {
         // @todo: move from local to prod (better yet, implement handling for both), also implement working headers
         const url = currentMeal ? '/api/recipe?currentRecipe=' + currentMeal.id : '/api/recipe';
@@ -24,21 +38,8 @@ async function getMeal(setMeal: Dispatch<SetStateAction<Meal | null>>, currentMe
     }
 }
 
-function renderMeal(meal: Meal, setMeal: Dispatch<SetStateAction<Meal | null>>): JSX.Element {
-    const ingredients = meal.ingredients.split("-");
-    const displayIngredients: Array<JSX.Element> = [];
-    ingredients.forEach((i) => displayIngredients.push(<div className={"IngredientItem"} key={i}>{i}</div>));
-    return <div className={"MealForm"}>
-        <div className={"MealName"}>
-            {meal.name}
-            <div className={meal.vegetarian ? "VeggieIcon" : "NoVeggieIcon"}>V</div>
-        </div>
-        <div className={"MealIngredients"}>
-            {displayIngredients}
-        </div>
-        <div className={"MealInstructions"}>
-            {meal.instructions}
-        </div>
-        <button className={"Reroll"} onClick={() => getMeal(setMeal, meal)}>Etwas anderes!</button>
-    </div>
+async function getMealById(id: Number) {
+    const url = "/api/find-by-id?recipeId=" + id
+    const response = await fetch(url)
+    return await response.json() as Meal
 }

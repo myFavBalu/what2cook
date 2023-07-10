@@ -1,0 +1,44 @@
+@import "../variables";
+
+.MealForm {
+  color: $color-headline;
+  border: 2px solid $color-border;
+  border-radius: 5px;
+  background-color: $color-component;
+  margin: 20px 5% 85px 5%;
+
+  .MealName {
+    font-size: 22px;
+    text-align: center;
+    border-bottom: 2px solid $color-border;
+
+    .VeggieIcon, .NoVeggieIcon {
+      display: inline;
+      float: right;
+      padding: 0 5px;
+    }
+
+    .NoVeggieIcon {
+      color: $color-no-veggie;
+      text-decoration: line-through;
+      text-decoration-color: $color-black;
+    }
+
+    .VeggieIcon {
+      color: $color-veggie;
+    }
+  }
+
+  .MealIngredients {
+    border-bottom: 2px solid $color-border;
+
+    .IngredientItem {
+      margin: 5px;
+    }
+  }
+
+  .MealInstructions {
+    margin: 5px;
+  }
+}
+

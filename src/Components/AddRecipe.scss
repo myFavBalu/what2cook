@@ -73,9 +73,8 @@ Input, textarea {
     font-size: $font-size-medium;
 
     .InstructionInput {
-      display: flex;
       resize: none;
-      width: 98%;
+      width: 90%;
       padding: 0 0 5px 20px;
     }
   }
@@ -87,6 +86,7 @@ Input, textarea {
     justify-content: space-between;
 
     .PreferencesSelect {
+      cursor: pointer;
       background-color: unset;
       border: none;
       color: $color-headline;
@@ -95,6 +95,7 @@ Input, textarea {
   }
 
 }
+
 .SavingButton {
   margin: 5px;
   border-radius: 5px;

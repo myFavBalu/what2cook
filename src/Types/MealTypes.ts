@@ -12,3 +12,8 @@ export type MealCreation = {
     instructions: string,
     vegetarian: boolean,
 }
+
+export type MealSearchResult = {
+    id: number,
+    name: string
+}

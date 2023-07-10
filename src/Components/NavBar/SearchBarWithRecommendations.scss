@@ -1,0 +1,38 @@
+@import "../../variables";
+
+.SearchBarWrapper {
+  z-index: 10;
+  position: absolute;
+  right: 25px;
+  top: 15px;
+  width: 15%;
+  min-width: 150px;
+
+  .SearchBar {
+    border: 1px solid $color-border;
+    border-radius: 3px;
+  }
+
+  .SearchResultContainer {
+    height: fit-content;
+    color: $color-headline;
+    background-color: $color-component;
+    border-left: 1px solid $color-border;
+    border-right: 1px solid $color-border;
+    border-bottom: 1px solid $color-border;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    overflow: hidden;
+
+    .SearchResultItem {
+      width: 100%;
+      border-bottom: 1px solid $color-border;
+      cursor: pointer;
+      padding: 5px 0 5px 5px;
+
+      &:last-child {
+        border: none;
+      }
+    }
+  }
+}

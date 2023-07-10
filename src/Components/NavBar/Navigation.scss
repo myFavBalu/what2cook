@@ -1,4 +1,4 @@
-@import "../variables";
+@import "../../variables";
 
 .NavigationWrapper {
   background: $color-component;
@@ -36,6 +36,6 @@
   }
 
   .NavigationElement:last-of-type {
-    margin-right: 0;
+    margin-right: 150px;
   }
 }
