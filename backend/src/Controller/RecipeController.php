@@ -2,9 +2,6 @@
 
 namespace App\Controller;
 
-// @todo: einschränken
-header("Access-Control-Allow-Origin: *");
-
 use App\Entity\Recipe;
 use App\Service\RecipeService;
 use Exception;
@@ -32,8 +29,11 @@ class RecipeController
     public function addRecipe(Request $request): JsonResponse
     {
         try {
-
             $bodyContent = json_decode($request->getContent(), true);
+
+            if ($bodyContent === null) {
+                throw new Exception("Requestbody is null");
+            }
 
             $recipe = new Recipe(
                 $bodyContent["name"],

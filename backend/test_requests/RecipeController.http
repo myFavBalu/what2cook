@@ -1,5 +1,5 @@
 ### add Recipe
-POST http://localhost:8000/api/add-recipe
+POST {{ip}}/api/add-recipe
 Content-Type: application/json
 
 {
@@ -14,3 +14,13 @@ GET http://localhost:8000/api/recipe
 Accept: application/json
 
 ###
+
+POST http://185.244.195.201/api/add-recipe
+Content-Type: application/json
+
+{
+  "name": "test",
+  "ingredients": "a- b- c",
+  "instructions": "test the test",
+  "vegetarian": true
+}

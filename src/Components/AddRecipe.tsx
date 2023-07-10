@@ -133,14 +133,14 @@ function Preferences(props: PreferencesProps) {
 async function addMeal(newMeal: MealCreation) {
     // todo: inputvalidation
     try {
-        const url = 'http://localhost:8000/api/add-recipe';
+        const url = '/api/add-recipe';
         const requestOptions = {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             // todo: just work with newMeal directly if possible (conversion to Meal?)
             body: JSON.stringify({
                 name: newMeal.name,
-                ingredients: newMeal.ingredients.join("- "),
+                ingredients: "- " + newMeal.ingredients.join("- "),
                 instructions: newMeal.instructions,
                 vegetarian: newMeal.vegetarian
             })

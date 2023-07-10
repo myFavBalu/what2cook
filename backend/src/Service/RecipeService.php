@@ -40,17 +40,15 @@ class RecipeService
         return $this->recipeRepository->find($randomRecipeId);
     }
 
-    public function addRecipe(Recipe $newRecipe): bool
+    /**
+     * @param Recipe $newRecipe
+     * @return void
+     * @throws Exception
+     */
+    public function addRecipe(Recipe $newRecipe): void
     {
-        try {
             $em = $this->recipeRepository->createQueryBuilder('recipe')->getEntityManager();
             $em->persist($newRecipe);
             $em->flush();
-            return true;
-        } catch (Exception $e) {
-            return false;
-        }
     }
 }
-
-;
