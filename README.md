@@ -2,11 +2,11 @@
 
 ## Setup
 
-Your first steps after cloning this repository should be installing all dependencies.
+Your first step after cloning this repository should be installing all dependencies.
 
-To do that for the frontend navigate to /src and run `yarn` or `npm install` (if you do not have either packagemanager then you need to install one first).
+To do that for the frontend navigate to /src and run `yarn` or `npm install` (if you do not have either package manager then you need to install one first).
 
-For the backend dependencies you need the packagemanager composer. After acquiring composer navigate to the /backend directory and simply run `composer install.
+For the backend dependencies, you need the package manager composer. After acquiring composer navigate to the /backend directory and simply run `composer install.
 
 Congratulations, you can now run w2c locally.
 
@@ -18,4 +18,4 @@ To run the frontend in development mode, navigate to the src directory and run `
 To start the Symfony server for the backend in development mode, navigate to the backend directory and run `symfony server:start`.
 ## Scripts
 
-All important scripts for deployment and more can be found under `/scripts`. Note that these scripts assume that you have an ssh-config for the target server with the Host "what2cook".
+All important scripts for deployment and more can be found under `/scripts`. Note that these scripts assume that you have a ssh-config for the target server with the Host "what2cook".
