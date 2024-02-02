@@ -22,7 +22,6 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 /composer.phar
-.idea
 
 /backend/.env.local
 /backend/.env.local.php
