@@ -37,13 +37,29 @@ Input, textarea {
     padding-bottom: 10px;
     border-bottom: 2px solid $color-border;
     font-size: $font-size-medium;
+    display: block;
 
     .IngredientItemWrapper {
       padding: 5px 5px 5px 20px;
       border-bottom: solid 1px $color-border;
+      display: flex;
+      justify-content: space-between;
 
       .IngredientItem {
-        // todo ?
+      }
+
+      .IngredientItemDeleteButton {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        background-color: $color-border;
+        border-color: $color-border;
+        font-size: 14px;
+        height: 2em;
+        width: 2em;
+        cursor: pointer;
+        color: $color-delete;
       }
     }
   }
@@ -60,8 +76,8 @@ Input, textarea {
       background-color: $color-border;
       border-color: $color-border;
       color: $color-headline;
-      height: 40px;
-      width: 40px;
+      height: 2em;
+      width: 2em;
       font-size: 26px;
       cursor: pointer;
     }

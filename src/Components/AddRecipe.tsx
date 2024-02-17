@@ -38,7 +38,7 @@ export function AddRecipe(): JSX.Element {
             setNewMeal({...newMeal, vegetarian: !newMeal.vegetarian})
         }}/>
 
-        <button className={"SavingButton"} onClick={()=>addMeal(newMeal)}>Speichern</button>
+        <button className={"SavingButton"} onClick={() => addMeal(newMeal)}>Speichern</button>
     </div>
 }
 
@@ -73,11 +73,21 @@ function IngredientList(props: IngredientListProps) {
         Zutaten:
         {props.ingredients.map((value, index) => {
             return <div className={"IngredientItemWrapper"} key={index}>
-                <input className={"IngredientItem"} value={value} onChange={(event) => {
-                    let newIngredients = props.ingredients
-                    newIngredients[index] = event.target.value
-                    props.setIngredients(newIngredients)
-                }}/>
+                <input className={"IngredientItem"}
+                       value={value}
+                       onChange={(event) => {
+                           let newIngredients = props.ingredients
+                           newIngredients[index] = event.target.value
+                           props.setIngredients(newIngredients)
+                       }}/>
+                <button className={"IngredientItemDeleteButton"}
+                     onClick={() => {
+                         let newIngredients = props.ingredients
+                         newIngredients.splice(index, 1)
+                         props.setIngredients(newIngredients)
+                     }}>
+                    x
+                </button>
             </div>
         })}
         <AddNewIngredient addNewIngredient={props.addNewIngredient}/>
