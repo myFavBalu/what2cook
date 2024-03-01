@@ -24,10 +24,6 @@ export function SearchBarWithRecommendations(): JSX.Element {
         } else setIsFirstRender(false)
     }, [searchTerm])
 
-    useEffect(() => {
-
-    }, [possibleResults])
-
     return <div className={"SearchBarWrapper"}>
         <input className={"SearchBar"} value={searchTerm} onFocus={(event) => {
             if (event.target.value === "Suche...") {
