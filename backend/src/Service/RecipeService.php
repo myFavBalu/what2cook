@@ -19,22 +19,24 @@ class RecipeService
      * @throws NoResultException
      * @throws Exception
      */
-    public function getRandomRecipe(?int $currentRecipeId): Recipe
+    public function getRandomRecipe(int $currentRecipeId): Recipe
     {
         // @todo: Exceptionhandling
         $qb = $this->recipeRepository->createQueryBuilder('recipe');
-        $numberOfRecipes = $qb
-            ->select('count(recipe.id)')
+
+        /**
+         * @var int[] $listOfRecipeIds
+         */
+        $listOfRecipeIds = $qb
+            ->select('recipe.id')
             ->getQuery()
-            ->getSingleScalarResult();
+            ->getArrayResult();
 
-        $randomRecipeId = random_int(1, $numberOfRecipes);
-
-        if ($currentRecipeId !== null) {
-            while ($randomRecipeId === (int)$currentRecipeId) {
-                $randomRecipeId = random_int(1, $numberOfRecipes);
-            }
+        if (in_array($currentRecipeId, $listOfRecipeIds)) {
+            $listOfRecipeIds = array_values(array_filter($listOfRecipeIds, fn($n) => $n != $currentRecipeId));
         }
+
+        $randomRecipeId = $listOfRecipeIds[random_int(0, sizeof($listOfRecipeIds) - 1)];
 
         return $this->recipeRepository->find($randomRecipeId);
     }
