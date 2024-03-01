@@ -18,6 +18,11 @@ To run the frontend in development mode, navigate to the src directory and run `
 
 To start the Symfony server for the backend in development mode, navigate to the backend directory and run `symfony server:start`.
 
+## Production Deployment
+
+The current nginx configuration is for what2cook.dev, as this is a .dev domain a ssl-certificate is required. 
+I recommend using certbot for easy and automatic handling of the matter.
+
 ## Scripts
 
 All important scripts for deployment and more can be found under `/scripts`. Note that these scripts assume that you have a ssh-config for the target server with the Host "what2cook".
