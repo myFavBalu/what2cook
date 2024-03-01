@@ -1,6 +1,8 @@
 import React, {useState} from "react";
 import {MealCreation} from "../Types/MealTypes";
-import "./AddRecipe.scss"
+import "./AddRecipe.scss";
+import {toast} from 'react-toastify';
+import {useNavigate} from "react-router-dom";
 
 export function AddRecipe(): JSX.Element {
     const [newMeal, setNewMeal] = useState<MealCreation>({
@@ -9,6 +11,8 @@ export function AddRecipe(): JSX.Element {
         instructions: "",
         vegetarian: true
     })
+    const navigation = useNavigate()
+
 
     return <div className={"MealCreationForm"}>
         <NameInput
@@ -38,7 +42,12 @@ export function AddRecipe(): JSX.Element {
             setNewMeal({...newMeal, vegetarian: !newMeal.vegetarian})
         }}/>
 
-        <button className={"SavingButton"} onClick={() => addMeal(newMeal)}>Speichern</button>
+        <button className={"SavingButton"}
+                onClick={
+                    () => addMeal(newMeal, () => navigation({pathname: "/"}))
+                }>
+            Speichern
+        </button>
     </div>
 }
 
@@ -81,11 +90,11 @@ function IngredientList(props: IngredientListProps) {
                            props.setIngredients(newIngredients)
                        }}/>
                 <button className={"IngredientItemDeleteButton"}
-                     onClick={() => {
-                         let newIngredients = props.ingredients
-                         newIngredients.splice(index, 1)
-                         props.setIngredients(newIngredients)
-                     }}>
+                        onClick={() => {
+                            let newIngredients = props.ingredients
+                            newIngredients.splice(index, 1)
+                            props.setIngredients(newIngredients)
+                        }}>
                     x
                 </button>
             </div>
@@ -141,7 +150,8 @@ function Preferences(props: PreferencesProps) {
     </div>
 }
 
-async function addMeal(newMeal: MealCreation) {
+async function addMeal(newMeal: MealCreation, onSuccess: () => void) {
+
     // todo: inputvalidation
     try {
         const url = '/api/add-recipe';
@@ -157,9 +167,18 @@ async function addMeal(newMeal: MealCreation) {
             })
         };
         console.log(requestOptions)
-        await fetch(url, requestOptions);
+        await fetch(url, requestOptions).then(
+            (value) => {
+                if (value.ok) {
+                    toast.success("Gespeichert! :-)", {onClose: () => onSuccess()})
+                } else {
+                    toast.error("Da ist etwas schief gelaufen! :-(")
+                    toast.error("Fehler: " + value.statusText)
+                }
+            }
+        )
     } catch (error) {
-        // todo: add Toasts
+        toast.error("Da ist etwas schief gelaufen! :-(")
         console.log(error)
     }
 }

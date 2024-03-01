@@ -3,9 +3,12 @@ import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import {Generator} from "./Components/Generator";
 import {BasePage} from "./BasePage";
 import {AddRecipe} from "./Components/AddRecipe";
+import {ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
-    return (
+    return <>
+        <ToastContainer autoClose={1500}/>
         <Router>
             <Routes>
                 <Route index element={<BasePage><Generator/></BasePage>}/>
@@ -14,8 +17,7 @@ function App() {
                 {/*<Route path={"/display"} element={<BasePage><Display/></BasePage>}*/}
             </Routes>
         </Router>
-
-    );
+    </>;
 }
 
 export default App;
