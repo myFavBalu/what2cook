@@ -1,6 +1,6 @@
 #!/bin/sh
 
-source config.sh
+source variables.sh
 
 echo "${info}copy config to server${default}"
 cd ../

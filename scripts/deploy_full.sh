@@ -1,6 +1,6 @@
 #!/bin/sh
 
-source config.sh
+source variables.sh
 
 echo "${info}Starting full deployment${default}"
 

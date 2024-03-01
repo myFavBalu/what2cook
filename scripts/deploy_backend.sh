@@ -1,6 +1,6 @@
 #!/bin/sh
 
-source config.sh
+source variables.sh
 
 echo "${info}copying full backend to server${default}"
 cd ../

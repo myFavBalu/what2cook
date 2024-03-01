@@ -1,6 +1,6 @@
 #!/bin/sh
 
-source config.sh
+source variables.sh
 
 echo "${info}building project${default}"
 cd ../
