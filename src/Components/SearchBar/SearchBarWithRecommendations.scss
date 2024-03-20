@@ -1,12 +1,5 @@
 @import "../../variables";
 
-.SearchBarWrapper {
-  z-index: 10;
-  position: absolute;
-  right: 25px;
-  top: 15px;
-  width: 15%;
-  min-width: 150px;
 
   .SearchBar {
     border: 1px solid $color-border;
@@ -34,5 +27,4 @@
         border: none;
       }
     }
-  }
 }

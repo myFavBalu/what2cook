@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {MealCreation} from "../Types/MealTypes";
+import {MealCreation} from "../../../Types/MealTypes";
 import "./AddRecipe.scss";
 import {toast} from 'react-toastify';
 import {useNavigate} from "react-router-dom";

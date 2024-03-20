@@ -38,4 +38,16 @@
   .NavigationElement:last-of-type {
     margin-right: 150px;
   }
+
+  .NavigationSearchBarWrapper {
+    display: flex;
+    // TODO: Fix Alignment
+    width: 20%;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    z-index: 10;
+    right: 25px;
+    top: 15px;
+  }
 }

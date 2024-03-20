@@ -1,8 +1,8 @@
 import React from 'react';
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
-import {Generator} from "./Components/Generator";
+import {Generator} from "./Components/Pages/Generator/Generator";
 import {BasePage} from "./BasePage";
-import {AddRecipe} from "./Components/AddRecipe";
+import {AddRecipe} from "./Components/Pages/AddRecipe/AddRecipe";
 import {ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 

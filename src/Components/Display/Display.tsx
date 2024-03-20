@@ -1,5 +1,6 @@
 import React from "react";
-import {Meal} from "../Types/MealTypes";
+import {Meal} from "../../Types/MealTypes";
+import "./Display.scss"
 
 type DisplayProps = {
     meal: Meal

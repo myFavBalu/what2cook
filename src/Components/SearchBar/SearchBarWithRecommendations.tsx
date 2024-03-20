@@ -24,14 +24,14 @@ export function SearchBarWithRecommendations(): JSX.Element {
         } else setIsFirstRender(false)
     }, [searchTerm])
 
-    return <div className={"SearchBarWrapper"}>
+    return <div>
         <input className={"SearchBar"} value={searchTerm} onFocus={(event) => {
             if (event.target.value === "Suche...") {
                 setSearchTerm("")
             }
         }} onChange={(e) => setSearchTerm(e.target.value)}/>
         {possibleResults.length > 0 &&
-            <SearchResultContainer possibleResults={possibleResults} resetSearchTerm={() => setSearchTerm("")}/>}
+            <SearchResultContainer possibleResults={possibleResults} resetSearchTerm={() => setSearchTerm("Suche...")}/>}
     </div>
 }
 

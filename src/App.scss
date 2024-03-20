@@ -1,5 +1,7 @@
 @import "variables";
 
 .App {
-  margin: 0 10px;
+  margin: 0 0.75em;
+  display: flex;
+  flex-direction: column;
 }
