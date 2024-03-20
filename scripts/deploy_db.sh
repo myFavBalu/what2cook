@@ -1,6 +1,6 @@
 #!/bin/sh
 
-source config.sh
+source variables.sh
 
 echo "${info}copying database to server${default}"
 
