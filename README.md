@@ -26,3 +26,7 @@ I recommend using certbot for easy and automatic handling of the matter.
 ## Scripts
 
 All important scripts for deployment and more can be found under `/scripts`. Note that these scripts assume that you have a ssh-config for the target server with the Host "what2cook".
+
+
+## Deployment on a Production-Server
+Please refer to the [correlating Readme](SETUP_PROD.md) for instructions.
