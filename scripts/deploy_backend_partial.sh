@@ -8,6 +8,9 @@ cd ../
 echo "${info}copying Controllers${default}"
 scp -r backend/src/Controller what2cook:/var/www/html/backend/src/
 
+echo "${info}copying DTOs${default}"
+scp -r backend/src/DTO what2cook:/var/www/html/backend/src/
+
 echo "${info}copying Services${default}"
 scp -r backend/src/Service what2cook:/var/www/html/backend/src/
 
