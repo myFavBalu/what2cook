@@ -2,10 +2,10 @@
 
 namespace App\Controller;
 
+use App\DTO\IdToNameDTO;
 use App\Entity\Recipe;
 use App\Service\RecipeService;
 use Exception;
-use stdClass;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -18,13 +18,44 @@ class RecipeController
     public function getRecipe(Request $request): JsonResponse
     {
         try {
-            $currentRecipeId = (int) $request->get("currentRecipe");
+            $currentRecipeId = (int)$request->get("currentRecipe");
             $randomRecipe = $this->recipeService->getRandomRecipe($currentRecipeId);
         } catch (Exception $e) {
             return new JsonResponse($e);
         }
 
         return new JsonResponse($randomRecipe->jsonSerialize());
+    }
+
+    public function getRecipeNamesWithId(): JsonResponse
+    {
+        try {
+            /**
+             * @var Recipe $recipe
+             */
+            $recipes = array_map(
+                function (Recipe $recipe): array {
+                    $recipeId = $recipe->getId();
+                    $recipeName = $recipe->getName();
+                    $idToName = new IdToNameDTO($recipeId, $recipeName);
+                    return $idToName->jsonSerialize();
+                },
+                $this->recipeService->getAllRecipes()
+            );
+        } catch (Exception $e) {
+            return new JsonResponse($e);
+        }
+
+        return new JsonResponse($recipes);
+    }
+
+    /**
+     * @param Recipe $recipe
+     * @return array<array<int, String>>
+     */
+    private function mapRecipesToNameAndId(Recipe $recipe): array
+    {
+        return array($recipe->getId(), $recipe->getName());
     }
 
     public function addRecipe(Request $request): JsonResponse
@@ -64,10 +95,10 @@ class RecipeController
          * @var Recipe $recipe
          */
         foreach ($results as $recipe) {
-            $returnObject = new stdClass();
-            $returnObject->name = $recipe->getName();
-            $returnObject->id = $recipe->getId();
-            $responseBody[] = $returnObject;
+            $id = $recipe->getId();
+            $name = $recipe->getName();
+            $returnObject = new IdToNameDTO($id, $name);
+            $responseBody[] = $returnObject->jsonSerialize();
         }
 
         return new JsonResponse($responseBody);
@@ -76,7 +107,7 @@ class RecipeController
     public function findRecipeById(Request $request): JsonResponse
     {
         try {
-            $currentRecipeId = (int) $request->get("recipeId");
+            $currentRecipeId = (int)$request->get("recipeId");
             $result = $this->recipeService->findRecipeById($currentRecipeId);
         } catch (Exception $e) {
             return new JsonResponse($e->getMessage(), 500);

@@ -42,6 +42,21 @@ class RecipeService
     }
 
     /**
+     * @return array<Recipe>
+     */
+    public function getAllRecipes(): array
+    {
+        $qb = $this->recipeRepository->createQueryBuilder('recipe');
+
+        /**
+         * @var Recipe[] $listOfRecipes
+         */
+        return $qb
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
      * @param Recipe $newRecipe
      * @return void
      * @throws Exception
@@ -60,8 +75,8 @@ class RecipeService
     public function findRecipeByName(string $searchName): array
     {
         $searchTerm = "%" . $searchName . "%";
-        $em = $this->recipeRepository->createQueryBuilder('recipe');
-        $query = $em->where("recipe.name LIKE :name")->setParameter("name", $searchTerm)->getQuery();
+        $qb = $this->recipeRepository->createQueryBuilder('recipe');
+        $query = $qb->where("recipe.name LIKE :name")->setParameter("name", $searchTerm)->getQuery();
         return $query->getResult();
     }
 

@@ -7,6 +7,11 @@ recipe_random:
     methods: GET
     controller: App\Controller\RecipeController::getRecipe
 
+all_recipes:
+    path: /api/all-names-with-id
+    methods: GET
+    controller: App\Controller\RecipeController::getRecipeNamesWithId
+
 add_recipe:
     path: /api/add-recipe
     methods: POST
