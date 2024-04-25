@@ -5,6 +5,7 @@ import {BasePage} from "./BasePage";
 import {AddRecipe} from "./Components/Pages/AddRecipe/AddRecipe";
 import {ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import {Overview} from "./Components/Pages/Overview/Overview";
 
 function App() {
     return <>
@@ -13,8 +14,8 @@ function App() {
             <Routes>
                 <Route index element={<BasePage><Generator/></BasePage>}/>
                 <Route path={"/generate"} element={<BasePage><Generator/></BasePage>}/>
+                <Route path={"/overview"} element={<BasePage><Overview /></BasePage>}/>
                 <Route path={"/create"} element={<BasePage><AddRecipe/></BasePage>}/>
-                {/*<Route path={"/display"} element={<BasePage><Display/></BasePage>}*/}
             </Routes>
         </Router>
     </>;
