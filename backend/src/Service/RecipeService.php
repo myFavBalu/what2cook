@@ -4,6 +4,7 @@ namespace App\Service;
 
 use App\Entity\Recipe;
 use App\Repository\RecipeRepository;
+use Doctrine\ORM\Mapping\OrderBy;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
 use Exception;
@@ -52,6 +53,7 @@ class RecipeService
          * @var Recipe[] $listOfRecipes
          */
         return $qb
+            ->orderBy('recipe.name')
             ->getQuery()
             ->getResult();
     }
