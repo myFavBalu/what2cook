@@ -21,9 +21,10 @@ export function Overview(): JSX.Element {
 
     return <div className={"OverviewContainer"}>
         {mealPlaceholders.map((placeholder) =>
-            <div className={"OverviewElement"} key={placeholder.id} onClick={() => {
-                navigation({pathname: "/generate", search: "?recipeId=" + placeholder.id})
-            }}>{placeholder.name}</div>)
+            <a className={"OverviewElement"}
+               key={placeholder.id}
+               href={"/generate?recipeId=" + placeholder.id}
+            >{placeholder.name}</a>)
         }
     </div>;
 }

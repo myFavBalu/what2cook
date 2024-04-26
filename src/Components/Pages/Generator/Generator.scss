@@ -7,6 +7,7 @@
   border-color: $color-border;
   color: $color-headline;
   height: 30px;
+  filter: drop-shadow(5px 5px 5px color-mix(in srgb, $color-background 75%, #000));
 }
 
 .Reroll {

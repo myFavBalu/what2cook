@@ -7,45 +7,62 @@
   padding: 0 25px;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
-  overflow: auto;
   user-select: none;
+  position: sticky;
+  top: 0;
+  align-items: center;
+  filter: drop-shadow(1px 1px 3px color-mix(in srgb, $color-background 75%, #000));
+
 
   .PageName {
     font-size: 25px;
     font-family: Bahnschrift sans-serif;
-    margin: auto 25px auto 0;
     color: #fff;
     cursor: pointer;
     text-decoration: none;
+    margin-right: 15px;
   }
 
-  .NavigationElement {
-    height: 50%;
-    color: $color-headline;
-    font-family: Verdana sans-serif;
-    font-size: 18px;
-    margin: auto 15px auto 0;
-    transition: color 0.5s;
-    cursor: pointer;
-    white-space: nowrap;
-    text-decoration: none;
-  }
 
-  .NavigationElement:hover {
-    color: $color-headline-hover;
-  }
+  .ScrollablePageContainer {
+    overflow: auto;
+    height: fit-content;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
 
-  .NavigationElement:last-of-type {
-    margin-right: 150px;
+    .NavigationElement {
+      height: 50%;
+      color: $color-headline;
+      font-family: Verdana sans-serif;
+      font-size: 18px;
+      transition: color 0.5s;
+      cursor: pointer;
+      white-space: nowrap;
+      text-decoration: none;
+    }
+
+    .NavigationElement:hover {
+      color: $color-headline-hover;
+    }
   }
 
   .NavigationSearchBarWrapper {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    z-index: 10;
-    right: 40px;
-    top: 15px;
+    width: 20%;
+    max-width: 200px;
+    margin: 1em 0 0 auto;
+    flex-direction: column;
+    align-self: flex-start;
+  }
+
+  @media only screen and (max-device-width: 480px) {
+    .ScrollablePageContainer {
+      display: none;
+    }
+
+    .NavigationSearchBarWrapper {
+      width: 50%;
+    }
   }
 }

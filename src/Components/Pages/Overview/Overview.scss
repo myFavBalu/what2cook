@@ -7,11 +7,15 @@
   background-color: $color-component;
   margin: 20px 5% 85px 5%;
   padding: 5px;
+  display: flex;
+  flex-direction: column;
 
-  * {
+  a {
+    color: $color-headline;
+    text-decoration: none;
     font-size: 18px;
-    cursor: pointer;
   }
+
 
   :not(:last-child) {
     border-bottom: 1px solid $color-border;
