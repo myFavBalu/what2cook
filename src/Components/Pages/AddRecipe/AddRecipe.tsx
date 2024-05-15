@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {MealCreation} from "../../../Types/MealTypes";
-import "./AddRecipe.scss";
+import s from "./AddRecipe.module.scss";
 import {toast} from 'react-toastify';
 import {useNavigate} from "react-router-dom";
 
@@ -14,7 +14,7 @@ export function AddRecipe(): JSX.Element {
     const navigation = useNavigate()
 
 
-    return <div className={"MealCreationForm"}>
+    return <div className={s.MealCreationForm}>
         <NameInput
             name={newMeal.name}
             setName={(newName) => {
@@ -42,7 +42,7 @@ export function AddRecipe(): JSX.Element {
             setNewMeal({...newMeal, vegetarian: !newMeal.vegetarian})
         }}/>
 
-        <button className={"SavingButton"}
+        <button className={s.SavingButton}
                 onClick={
                     () => addMeal(newMeal, () => navigation({pathname: "/"}))
                 }>
@@ -57,8 +57,8 @@ type NameInputProps = {
 }
 
 function NameInput(props: NameInputProps) {
-    return <div className={"NameInputWrapper"}>
-        <input value={props.name} className={"NameInput"}
+    return <div className={s.NameInputWrapper}>
+        <input value={props.name} className={s.NameInput}
                onFocus={(event) => {
                    if (event.target.value === "Name") {
                        props.setName("")
@@ -78,18 +78,18 @@ type IngredientListProps = {
 }
 
 function IngredientList(props: IngredientListProps) {
-    return <div className={"IngredientList"}>
+    return <div className={s.IngredientList}>
         Zutaten:
         {props.ingredients.map((value, index) => {
-            return <div className={"IngredientItemWrapper"} key={index}>
-                <input className={"IngredientItem"}
+            return <div className={s.IngredientItemWrapper} key={index}>
+                <input className={s.IngredientItem}
                        value={value}
                        onChange={(event) => {
                            let newIngredients = props.ingredients
                            newIngredients[index] = event.target.value
                            props.setIngredients(newIngredients)
                        }}/>
-                <button className={"IngredientItemDeleteButton"}
+                <button className={s.IngredientItemDeleteButton}
                         onClick={() => {
                             let newIngredients = props.ingredients
                             newIngredients.splice(index, 1)
@@ -108,8 +108,8 @@ type AddNewIngredientProps = {
 }
 
 function AddNewIngredient(props: AddNewIngredientProps) {
-    return <div className={"AddNewIngredientBar"} onClick={props.addNewIngredient}>
-        <button className={"AddNewIngredientButton"}>+</button>
+    return <div className={s.AddNewIngredientBar} onClick={props.addNewIngredient}>
+        <button className={s.AddNewIngredientButton}>+</button>
     </div>
 }
 
@@ -120,10 +120,10 @@ type InstructionProps = {
 }
 
 function Instructions(props: InstructionProps) {
-    return <div className={"InstructionWrapper"}>
+    return <div className={s.InstructionWrapper}>
         Zubereitung:
         <br/>
-        <textarea rows={10} className={"InstructionInput"}
+        <textarea rows={10} className={s.InstructionInput}
                   value={props.instructions}
                   onChange={(event) => props.setInstructions(event.target.value)}/>
     </div>
@@ -136,9 +136,9 @@ type PreferencesProps = {
 }
 
 function Preferences(props: PreferencesProps) {
-    return <div className={"PreferencesWrapper"}>
+    return <div className={s.PreferencesWrapper}>
         Ernährungsweise:
-        <select className={"PreferencesSelect"} defaultValue={props.isVegetarian ? "veggie" : "omni"}
+        <select className={s.PreferencesSelect} defaultValue={props.isVegetarian ? "veggie" : "omni"}
                 onChange={props.toggleIsVegetarian}>
             <option value={"veggie"}>
                 vegetarisch

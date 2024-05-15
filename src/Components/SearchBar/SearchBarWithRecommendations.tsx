@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import "./SearchBarWithRecommendations.scss"
+import s from "./SearchBarWithRecommendations.module.scss"
 import {MealSearchResult} from "../../Types/MealTypes";
 import {useNavigate} from "react-router-dom";
 import {getMealIdByName} from "../../ApiCalls/getMealIdByName";
@@ -25,7 +25,7 @@ export function SearchBarWithRecommendations(): JSX.Element {
     }, [searchTerm])
 
     return <>
-        <input className={"SearchBar"} value={searchTerm} onFocus={(event) => {
+        <input name={"SearchBar"} className={s.SearchBar} value={searchTerm} onFocus={(event) => {
             if (event.target.value === "Suche...") {
                 setSearchTerm("")
             }
@@ -48,7 +48,7 @@ function SearchResultContainer(props: SearchResultContainerProps) {
 
     props.possibleResults.forEach((result, index) => {
         containerArray.push(
-            <div className={"SearchResultItem"}
+            <div className={s.SearchResultItem}
                  key={index}
                  onClick={() => {
                      props.resetSearchTerm()
@@ -59,7 +59,7 @@ function SearchResultContainer(props: SearchResultContainerProps) {
             </div>)
     })
 
-    return <div className={"SearchResultContainer"}>
+    return <div className={s.SearchResultContainer}>
         {containerArray}
     </div>
 }

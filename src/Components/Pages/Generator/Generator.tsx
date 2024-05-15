@@ -1,6 +1,6 @@
 import {Meal} from "../../../Types/MealTypes";
 import React, {useEffect, useState} from "react";
-import "./Generator.scss";
+import s from "./Generator.module.scss";
 import {Display} from "../../Display/Display";
 import {useSearchParams} from "react-router-dom";
 import {getMealById} from "../../../ApiCalls/getMealById";
@@ -25,7 +25,7 @@ export function Generator(): JSX.Element {
     } else {
         return <>
             <Display meal={meal}/>
-            <button className={"Reroll"} onClick={() => getRandomMeal(meal).then(setMeal)}>Etwas anderes!</button>
+            <button className={s.Reroll} onClick={() => getRandomMeal(meal).then(setMeal)}>Etwas anderes!</button>
         </>
     }
 }

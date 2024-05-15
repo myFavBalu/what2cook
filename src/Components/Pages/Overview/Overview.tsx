@@ -1,13 +1,10 @@
 import {MealSearchResult} from "../../../Types/MealTypes";
 import React, {useEffect, useState} from "react";
-import "./Overview.scss"
+import s from "./Overview.module.scss"
 import {getMealNamesWithIds} from "../../../ApiCalls/getMealNamesWithIds";
-import {useNavigate} from "react-router-dom";
-
 
 export function Overview(): JSX.Element {
     const [mealPlaceholders, setMealPlaceholders] = useState<MealSearchResult[]>([]);
-    const navigation = useNavigate()
 
     useEffect(() => {
         getMealNamesWithIds().then((mealPlaceholders) => {
@@ -19,9 +16,9 @@ export function Overview(): JSX.Element {
         return <></>;
     }
 
-    return <div className={"OverviewContainer"}>
+    return <div className={s.OverviewContainer}>
         {mealPlaceholders.map((placeholder) =>
-            <a className={"OverviewElement"}
+            <a className={s.OverviewElement}
                key={placeholder.id}
                href={"/generate?recipeId=" + placeholder.id}
             >{placeholder.name}</a>)

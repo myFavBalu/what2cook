@@ -1,24 +1,25 @@
 import React from "react";
 import {Meal} from "../../Types/MealTypes";
-import "./Display.scss"
+import s from "./Display.module.scss"
 
 type DisplayProps = {
     meal: Meal
 }
+
 export function Display(props: DisplayProps) {
     const ingredients = props.meal.ingredients.split("-");
     const displayIngredients: Array<JSX.Element> = [];
-    ingredients.forEach((i) => displayIngredients.push(<div className={"IngredientItem"} key={i}>{i}</div>));
+    ingredients.forEach((i) => displayIngredients.push(<div className={s.IngredientItem} key={i}>{i}</div>));
 
-    return <div className={"MealForm"}>
-        <div className={"MealName"}>
+    return <div className={s.MealForm}>
+        <div className={s.MealName}>
             {props.meal.name}
-            <div className={props.meal.vegetarian ? "VeggieIcon" : "NoVeggieIcon"}>V</div>
+            <div className={props.meal.vegetarian ? s.VeggieIcon : s.NoVeggieIcon}>V</div>
         </div>
-        <div className={"MealIngredients"}>
+        <div className={s.MealIngredients}>
             {displayIngredients}
         </div>
-        <div className={"MealInstructions"}>
+        <div className={s.MealInstructions}>
             {props.meal.instructions}
         </div>
     </div>

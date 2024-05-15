@@ -1,12 +1,12 @@
-import "./MobileMenu.scss"
+import s from "./MobileMenu.module.scss"
 import {BurgerMenu} from "../Icons/BurgerMenu";
 
 export function MobileMenu(): JSX.Element {
-    return <div id="wrapper">
-        <input type="checkbox" id="menu" name="menu" className="menu-checkbox"/>
-        <div className="menu">
-            <label className="menu-toggle" htmlFor="menu"><BurgerMenu/></label>
-            <h1 className={"menu-title"}>Seiten</h1>
+    return <div id={s["wrapper"]}>
+        <input type="checkbox" id="menu" name="menu" className={s.MenuCheckbox}/>
+        <div className={s.Menu}>
+            <label className={s.MenuToggle} htmlFor="menu"><BurgerMenu/></label>
+            <h1 className={s.MenuTitle}>Seiten</h1>
             <ul>
                 <li>
                     <a href={"/generate"}>Rezeptgenerator</a>

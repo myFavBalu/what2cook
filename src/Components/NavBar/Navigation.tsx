@@ -1,16 +1,16 @@
-import "./Navigation.scss"
+import s from "./Navigation.module.scss"
 import {NavLink} from "react-router-dom";
 import {SearchBarWithRecommendations} from "../SearchBar/SearchBarWithRecommendations";
 
 export function Navigation(): JSX.Element {
-    return <div className={"NavigationWrapper"}>
-        <NavLink className={"PageName"} to={"/"}>what2cook</NavLink>
-        <div className={"ScrollablePageContainer"}>
-            <NavLink className={"NavigationElement"} to={"/generate"}>Rezeptgenerator</NavLink>
-            <NavLink className={"NavigationElement"} to={"/overview"}>Alle Rezepte</NavLink>
-            <NavLink className={"NavigationElement"} to={"/create"}>Rezept anlegen</NavLink>
+    return <div className={s.NavigationWrapper}>
+        <NavLink className={s.PageName} to={"/"}>what2cook</NavLink>
+        <div className={s.ScrollablePageContainer}>
+            <NavLink className={s.NavigationElement} to={"/generate"}>Rezeptgenerator</NavLink>
+            <NavLink className={s.NavigationElement} to={"/overview"}>Alle Rezepte</NavLink>
+            <NavLink className={s.NavigationElement} to={"/create"}>Rezept anlegen</NavLink>
         </div>
-        <div className={"NavigationSearchBarWrapper"}>
+        <div className={s.NavigationSearchBarWrapper}>
             <SearchBarWithRecommendations/>
         </div>
     </div>
