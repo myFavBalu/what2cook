@@ -4,7 +4,6 @@ namespace App\Service;
 
 use App\Entity\Recipe;
 use App\Repository\RecipeRepository;
-use Doctrine\ORM\Mapping\OrderBy;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
 use Exception;
@@ -22,16 +21,7 @@ class RecipeService
      */
     public function getRandomRecipe(int $currentRecipeId): Recipe
     {
-        // @todo: Exceptionhandling
-        $qb = $this->recipeRepository->createQueryBuilder('recipe');
-
-        /**
-         * @var int[] $listOfRecipeIds
-         */
-        $listOfRecipeIds = $qb
-            ->select('recipe.id')
-            ->getQuery()
-            ->getArrayResult();
+        $listOfRecipeIds = $this->recipeRepository->getAllIds();
 
         if (in_array($currentRecipeId, $listOfRecipeIds)) {
             $listOfRecipeIds = array_values(array_filter($listOfRecipeIds, fn($n) => $n != $currentRecipeId));
@@ -47,15 +37,7 @@ class RecipeService
      */
     public function getAllRecipes(): array
     {
-        $qb = $this->recipeRepository->createQueryBuilder('recipe');
-
-        /**
-         * @var Recipe[] $listOfRecipes
-         */
-        return $qb
-            ->orderBy('recipe.name')
-            ->getQuery()
-            ->getResult();
+       return $this->recipeRepository->getAllRecipes();
     }
 
     /**
@@ -65,9 +47,7 @@ class RecipeService
      */
     public function addRecipe(Recipe $newRecipe): void
     {
-        $em = $this->recipeRepository->createQueryBuilder('recipe')->getEntityManager();
-        $em->persist($newRecipe);
-        $em->flush();
+       $this->recipeRepository->save($newRecipe, true);
     }
 
     /**
@@ -76,10 +56,7 @@ class RecipeService
      */
     public function findRecipeByName(string $searchName): array
     {
-        $searchTerm = "%" . $searchName . "%";
-        $qb = $this->recipeRepository->createQueryBuilder('recipe');
-        $query = $qb->where("recipe.name LIKE :name")->setParameter("name", $searchTerm)->getQuery();
-        return $query->getResult();
+      return $this->recipeRepository->findRecipeByName($searchName);
     }
 
     public function findRecipeById(int $currentRecipeId): Recipe

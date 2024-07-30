@@ -39,28 +39,47 @@ class RecipeRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return Recipe[] Returns an array of Recipe objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('r')
-//            ->andWhere('r.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('r.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    /**
+     * @return int[]
+     */
+    public function getAllIds(): array
+    {
+        $qb = $this->createQueryBuilder('recipe');
 
-//    public function findOneBySomeField($value): ?Recipe
-//    {
-//        return $this->createQueryBuilder('r')
-//            ->andWhere('r.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+        /**
+         * @var int[] $listOfRecipeIds
+         */
+        return $qb
+            ->select('id')
+            ->from('recipe', 'r')
+            ->getQuery()
+            ->getArrayResult();
+    }
+
+    /**
+     * @return Recipe[]
+     */
+    public function getAllRecipes(): array
+    {
+        $qb = $this->createQueryBuilder('recipe');
+
+        /**
+         * @var Recipe[] $listOfRecipes
+         */
+        return $qb
+            ->orderBy('recipe.name')
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * @return Recipe[]
+     */
+    public function findRecipeByName(string $searchword): array
+    {
+        $searchTerm = "%" . $searchword . "%";
+        $qb = $this->createQueryBuilder('recipe');
+        $query = $qb->where("recipe.name LIKE :name")->setParameter("name", $searchTerm)->getQuery();
+        return $query->getResult();
+    }
 }
