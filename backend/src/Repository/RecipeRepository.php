@@ -50,8 +50,7 @@ class RecipeRepository extends ServiceEntityRepository
          * @var int[] $listOfRecipeIds
          */
         return $qb
-            ->select('id')
-            ->from('recipe', 'r')
+            ->select('recipe.id')
             ->getQuery()
             ->getArrayResult();
     }
