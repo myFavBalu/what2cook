@@ -6,6 +6,8 @@
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/.idea" />
       <excludeFolder url="file://$MODULE_DIR$/build" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/vendor" />
+      <excludeFolder url="file://$MODULE_DIR$/backend/vendor/symfony/process" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
   </component>

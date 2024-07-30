@@ -26,7 +26,6 @@
     "create_migration": "cd scripts && bash create_migrations.sh",
     "deploy": "cd scripts && bash deploy_full.sh",
     "deploy_backend": "cd scripts && bash deploy_backend.sh",
-    "deploy_backend_partial": "cd scripts && bash deploy_backend_partial.sh",
     "deploy_build": "cd scripts && bash deploy_build.sh",
     "deploy_config": "cd scripts && bash deploy_config.sh",
     "deploy_db": "cd scripts && bash deploy_database.sh",

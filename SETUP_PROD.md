@@ -5,7 +5,7 @@ First of all to make sure that everything is up to date:</br>
 ## NGINX:
 Webserver-Software
 ### removing apache
-This step is necessary, in case your image comes with apache preinstalled, to prevent collisions with nignx</br>
+This step is only necessary, in case your serverimage comes with apache preinstalled, to prevent collisions with nignx</br>
 `sudo service apache2 stop`</br>
 `sudo apt --purge apache2 apache2-utils apache2.2-bin apache2-common`</br>
 `sudo apt auto remove`</br>
@@ -20,11 +20,11 @@ Interpreter for the PHP-based Backend
 `sudo apt install gnupg2`</br>
 `sudo sh -c 'echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/php.list‘`</br>
 `wget -qO - https://packages.sury.org/php/apt.gpg | sudo apt-key add -`</br>
-### installing PHP8.2
+### installing PHP8.3
 `sudo apt update`</br>
-`sudo apt install php8.2`</br>
+`sudo apt install php8.3`</br>
 ### support for the sqlite db
-`sudo apt install php8.2-sqlite3`</br>
+`sudo apt install php8.3-sqlite3`</br>
 
 ## Symfony
 A powerful PHP framework
@@ -42,10 +42,10 @@ A powerful PHP framework
 ## PHP-FPM
 A process manager for PHP-Scripts
 ### installing PHP-FPM
-`apt install php8.2-fpm`</br>
-`chown nginx:nginx /var/run/php/php8.2-fpm.sock`</br>
+`apt install php8.3-fpm`</br>
+`chown nginx:nginx /var/run/php/php8.3-fpm.sock`</br>
 ### checking the status of PHP-FPM
-`systemctl status php8.2-fpm`</br>
+`systemctl status php8.3-fpm`</br>
 ### configuring pools
 TODO
 
