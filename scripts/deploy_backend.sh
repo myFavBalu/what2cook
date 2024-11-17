@@ -14,6 +14,7 @@ ssh what2cook "rm -rf /var/www/html/backend"
 
 echo "${info}unpacking new backend on server${default}"
 ssh what2cook "tar -xzvf /var/www/html/backend.tar.gz -C /var/www/html/"
+ssh what2cook "chmod 777 /var/www/html/backend/var"
 
 echo "${info}removing compressed files${default}"
 ssh what2cook "rm -f /var/www/html/backend.tar.gz"
