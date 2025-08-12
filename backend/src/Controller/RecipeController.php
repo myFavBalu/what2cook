@@ -5,9 +5,11 @@ namespace App\Controller;
 use App\DTO\IdToNameDTO;
 use App\Entity\Recipe;
 use App\Service\RecipeService;
+use Doctrine\Common\Collections\ArrayCollection;
 use Exception;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+
 
 class RecipeController
 {
@@ -49,15 +51,6 @@ class RecipeController
         return new JsonResponse($recipes);
     }
 
-    /**
-     * @param Recipe $recipe
-     * @return array<array<int, String>>
-     */
-    private function mapRecipesToNameAndId(Recipe $recipe): array
-    {
-        return array($recipe->getId(), $recipe->getName());
-    }
-
     public function addRecipe(Request $request): JsonResponse
     {
         try {
@@ -71,7 +64,9 @@ class RecipeController
                 $bodyContent["name"],
                 $bodyContent['ingredients'],
                 $bodyContent['instructions'],
-                $bodyContent['vegetarian']
+                $bodyContent['vegetarian'],
+                // TODO implement a proper solution for adding tags
+                new ArrayCollection()
             );
 
             $this->recipeService->addRecipe($recipe);
@@ -91,9 +86,7 @@ class RecipeController
             return new JsonResponse($e->getMessage(), 500);
         }
         $responseBody = [];
-        /**
-         * @var Recipe $recipe
-         */
+
         foreach ($results as $recipe) {
             $id = $recipe->getId();
             $name = $recipe->getName();
@@ -114,5 +107,14 @@ class RecipeController
         }
 
         return new JsonResponse($result->jsonSerialize());
+    }
+
+    /**
+     * @param Recipe $recipe
+     * @return array<array<int, String>>
+     */
+    private function mapRecipesToNameAndId(Recipe $recipe): array
+    {
+        return array($recipe->getId(), $recipe->getName());
     }
 }

@@ -3,9 +3,10 @@
 namespace App\Entity;
 
 use App\Repository\RecipeRepository;
-use Doctrine\DBAL\Types\Types;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use http\Exception;
+use Doctrine\ORM\Mapping\JoinTable;
+use Doctrine\ORM\Mapping\ManyToMany;
 use JetBrains\PhpStorm\ArrayShape;
 
 #[ORM\Entity(repositoryClass: RecipeRepository::class)]
@@ -26,20 +27,29 @@ class Recipe
     private string $instructions;
 
     #[ORM\Column]
-    private bool $vegetarian = true;
+    private bool $vegetarian;
+
+    /**
+     * @var Collection<int, Tag>
+     */
+    #[ManyToMany(targetEntity: Tag::class, inversedBy: 'recipes')]
+    #[JoinTable(name: 'recipes_tags')]
+    private Collection $tags;
 
     /**
      * @param string $name
      * @param string $ingredients
      * @param string $instructions
      * @param bool $vegetarian
+     * @param Collection<int, Tag> $tags
      */
-    public function __construct(string $name, string $ingredients, string $instructions, bool $vegetarian)
+    public function __construct(string $name, string $ingredients, string $instructions, bool $vegetarian, Collection $tags)
     {
         $this->name = $name;
         $this->ingredients = $ingredients;
         $this->instructions = $instructions;
         $this->vegetarian = $vegetarian;
+        $this->tags = $tags;
     }
 
     public function getId(): int
@@ -87,7 +97,32 @@ class Recipe
         $this->vegetarian = $vegetarian;
     }
 
-    #[ArrayShape(['id' => "int", 'name' => "string", 'ingredients' => "string", 'instructions' => "string", 'vegetarian' => "bool"])]
+    public function getTags(): Collection
+    {
+        return $this->tags;
+    }
+
+    /**
+     * @param Collection<int, Tag> $tags
+     **/
+    public function setTags(Collection $tags): void
+    {
+        foreach ($tags as $tag) {
+            $tag->addRecipe($this);
+        }
+
+        $this->tags = $tags;
+    }
+
+    public function addTag(Tag $tag): void
+    {
+        if (!$this->tags->contains($tag)) {
+            $tag->addRecipe($this);
+            $this->tags->add($tag);
+        }
+    }
+
+    #[ArrayShape(['id' => "int", 'name' => "string", 'ingredients' => "string", 'instructions' => "string", 'vegetarian' => "bool", 'tags' => 'array<int, array{id: int, name: string}>'])]
     public function jsonSerialize(): array
     {
         return [
@@ -96,6 +131,7 @@ class Recipe
             'ingredients' => $this->ingredients,
             'instructions' => $this->instructions,
             'vegetarian' => $this->vegetarian,
+            'tags' => $this->tags->map(fn(Tag $tag) => $tag->jsonSerialize())->toArray()
         ];
     }
 }
