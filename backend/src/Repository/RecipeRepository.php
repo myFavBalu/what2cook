@@ -74,7 +74,7 @@ class RecipeRepository extends ServiceEntityRepository
     /**
      * @return Recipe[]
      */
-    public function findRecipeByName(string $searchword): array
+    public function findRecipesByName(string $searchword): array
     {
         $searchTerm = "%" . $searchword . "%";
         $qb = $this->createQueryBuilder('recipe');

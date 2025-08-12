@@ -54,9 +54,9 @@ class RecipeService
      * @param string $searchName
      * @return array<Recipe>
      */
-    public function findRecipeByName(string $searchName): array
+    public function findRecipesByName(string $searchName): array
     {
-      return $this->recipeRepository->findRecipeByName($searchName);
+      return $this->recipeRepository->findRecipesByName($searchName);
     }
 
     public function findRecipeById(int $currentRecipeId): Recipe

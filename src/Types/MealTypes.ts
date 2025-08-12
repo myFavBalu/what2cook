@@ -3,7 +3,12 @@ export type Meal = {
     name: string,
     ingredients: string,
     instructions: string,
-    vegetarian: boolean
+    tags: Tag[],
+}
+
+export type Tag = {
+    id: number,
+    name: string,
 }
 
 export type MealCreation = {

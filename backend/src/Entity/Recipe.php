@@ -26,9 +26,6 @@ class Recipe
     #[ORM\Column(length: 999999)]
     private string $instructions;
 
-    #[ORM\Column]
-    private bool $vegetarian;
-
     /**
      * @var Collection<int, Tag>
      */
@@ -40,16 +37,14 @@ class Recipe
      * @param string $name
      * @param string $ingredients
      * @param string $instructions
-     * @param bool $vegetarian
      * @param Collection<int, Tag> $tags
      */
-    public function __construct(string $name, string $ingredients, string $instructions, bool $vegetarian, Collection $tags)
+    public function __construct(string $name, string $ingredients, string $instructions, Collection $tags)
     {
         $this->name = $name;
         $this->ingredients = $ingredients;
         $this->instructions = $instructions;
-        $this->vegetarian = $vegetarian;
-        $this->tags = $tags;
+        $this->setTags($tags);
     }
 
     public function getId(): int
@@ -87,16 +82,6 @@ class Recipe
         $this->instructions = $instructions;
     }
 
-    public function isVegetarian(): bool
-    {
-        return $this->vegetarian;
-    }
-
-    public function setVegetarian(bool $vegetarian): void
-    {
-        $this->vegetarian = $vegetarian;
-    }
-
     public function getTags(): Collection
     {
         return $this->tags;
@@ -122,7 +107,7 @@ class Recipe
         }
     }
 
-    #[ArrayShape(['id' => "int", 'name' => "string", 'ingredients' => "string", 'instructions' => "string", 'vegetarian' => "bool", 'tags' => 'array<int, array{id: int, name: string}>'])]
+    #[ArrayShape(['id' => "int", 'name' => "string", 'ingredients' => "string", 'instructions' => "string", 'tags' => 'array<int, array{id: int, name: string}>'])]
     public function jsonSerialize(): array
     {
         return [
@@ -130,7 +115,6 @@ class Recipe
             'name' => $this->name,
             'ingredients' => $this->ingredients,
             'instructions' => $this->instructions,
-            'vegetarian' => $this->vegetarian,
             'tags' => $this->tags->map(fn(Tag $tag) => $tag->jsonSerialize())->toArray()
         ];
     }

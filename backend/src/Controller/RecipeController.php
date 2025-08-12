@@ -4,7 +4,9 @@ namespace App\Controller;
 
 use App\DTO\IdToNameDTO;
 use App\Entity\Recipe;
+use App\Entity\Tag;
 use App\Service\RecipeService;
+use App\Service\TagService;
 use Doctrine\Common\Collections\ArrayCollection;
 use Exception;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -13,7 +15,9 @@ use Symfony\Component\HttpFoundation\Request;
 
 class RecipeController
 {
-    public function __construct(private readonly RecipeService $recipeService)
+    public function __construct(
+        private readonly RecipeService $recipeService,
+        private readonly TagService    $tagService)
     {
     }
 
@@ -57,16 +61,30 @@ class RecipeController
             $bodyContent = json_decode($request->getContent(), true);
 
             if ($bodyContent === null) {
-                throw new Exception("Requestbody is null");
+                throw new Exception('Requestbody is null');
+            }
+
+            $tags = new ArrayCollection();
+
+            /**
+             * @var string $tagName
+             */
+            foreach ($bodyContent['tags'] as $tagName) {
+                $existingTag = $this->tagService->findTagByExactName($tagName);
+
+                if (!$existingTag) {
+                    $existingTag = new Tag($tagName);
+                    $this->tagService->addTag($existingTag);
+                }
+
+                $tags->add($existingTag);
             }
 
             $recipe = new Recipe(
                 $bodyContent["name"],
                 $bodyContent['ingredients'],
                 $bodyContent['instructions'],
-                $bodyContent['vegetarian'],
-                // TODO implement a proper solution for adding tags
-                new ArrayCollection()
+                $tags
             );
 
             $this->recipeService->addRecipe($recipe);
@@ -81,7 +99,7 @@ class RecipeController
     {
         try {
             $searchName = $request->get("searchName");
-            $results = $this->recipeService->findRecipeByName($searchName);
+            $results = $this->recipeService->findRecipesByName($searchName);
         } catch (Exception $e) {
             return new JsonResponse($e->getMessage(), 500);
         }

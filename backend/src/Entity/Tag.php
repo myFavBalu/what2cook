@@ -2,12 +2,14 @@
 
 namespace App\Entity;
 
+use App\Repository\TagRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\ManyToMany;
 use JetBrains\PhpStorm\ArrayShape;
 
-#[ORM\Entity]
+#[ORM\Entity(repositoryClass: TagRepository::class)]
 class Tag
 {
     #[ORM\Id]
@@ -30,6 +32,7 @@ class Tag
     public function __construct(string $name)
     {
         $this->name = $name;
+        $this->recipes = new ArrayCollection([]);
     }
 
     public function getId(): int

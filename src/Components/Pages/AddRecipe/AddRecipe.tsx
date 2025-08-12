@@ -151,8 +151,6 @@ function Preferences(props: PreferencesProps) {
 }
 
 async function addMeal(newMeal: MealCreation, onSuccess: () => void) {
-
-    // todo: inputvalidation
     try {
         const url = '/api/add-recipe';
         const requestOptions = {
@@ -163,7 +161,8 @@ async function addMeal(newMeal: MealCreation, onSuccess: () => void) {
                 name: newMeal.name,
                 ingredients: "- " + newMeal.ingredients.join("- "),
                 instructions: newMeal.instructions,
-                vegetarian: newMeal.vegetarian
+                // TODO: proper implementation of tags for the frontend, needs ui in this component and similar logic to searchbar regarding suggestions
+                tags: newMeal.vegetarian ? ['vegetarisch'] : []
             })
         };
         console.log(requestOptions)

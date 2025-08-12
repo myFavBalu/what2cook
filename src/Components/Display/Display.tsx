@@ -14,7 +14,9 @@ export function Display(props: DisplayProps) {
     return <div className={s.MealForm}>
         <div className={s.MealName}>
             {props.meal.name}
-            <div className={props.meal.vegetarian ? s.VeggieIcon : s.NoVeggieIcon}>V</div>
+            <div
+                className={props.meal.tags.some((tag) => tag.name === "vegetarisch") ? s.VeggieIcon : s.NoVeggieIcon}>V
+            </div>
         </div>
         <div className={s.MealIngredients}>
             {displayIngredients}

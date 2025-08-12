@@ -3,10 +3,12 @@ POST {{uri}}/api/add-recipe
 Content-Type: application/json
 
 {
-  "name": "Name",
+  "name": "Aaaallererstes Testrezept",
   "ingredients": "a- b- c",
-  "instructions": "",
-  "vegetarian": true
+  "instructions": "teste!",
+  "tags": [
+    "testTag"
+  ]
 }
 
 ### get Recipe
