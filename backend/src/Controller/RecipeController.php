@@ -5,15 +5,18 @@ namespace App\Controller;
 use App\DTO\IdToNameDTO;
 use App\Entity\Recipe;
 use App\Entity\Tag;
+use App\Request\AddRecipeRequest;
 use App\Service\RecipeService;
 use App\Service\TagService;
 use Doctrine\Common\Collections\ArrayCollection;
 use Exception;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Attribute\MapRequestPayload;
 
 
-class RecipeController
+class RecipeController extends AbstractController
 {
     public function __construct(
         private readonly RecipeService $recipeService,
@@ -55,42 +58,33 @@ class RecipeController
         return new JsonResponse($recipes);
     }
 
-    public function addRecipe(Request $request): JsonResponse
+    /**
+     * @throws Exception
+     */
+    public function addRecipe(#[MapRequestPayload] AddRecipeRequest $request): JsonResponse
     {
-        try {
-            $bodyContent = json_decode($request->getContent(), true);
+        $tags = new ArrayCollection();
 
-            if ($bodyContent === null) {
-                throw new Exception('Requestbody is null');
+        $requestTags = $request->getTags();
+        foreach (array_unique($requestTags, SORT_REGULAR) as $tag) {
+            $existingTag = $this->tagService->findTagByExactName($tag->getName());
+
+            if (!$existingTag) {
+                $existingTag = new Tag($tag->getName());
+                $this->tagService->addTag($existingTag);
             }
 
-            $tags = new ArrayCollection();
-
-            /**
-             * @var string $tagName
-             */
-            foreach ($bodyContent['tags'] as $tagName) {
-                $existingTag = $this->tagService->findTagByExactName($tagName);
-
-                if (!$existingTag) {
-                    $existingTag = new Tag($tagName);
-                    $this->tagService->addTag($existingTag);
-                }
-
-                $tags->add($existingTag);
-            }
-
-            $recipe = new Recipe(
-                $bodyContent["name"],
-                $bodyContent['ingredients'],
-                $bodyContent['instructions'],
-                $tags
-            );
-
-            $this->recipeService->addRecipe($recipe);
-        } catch (Exception $e) {
-            return new JsonResponse($e->getMessage(), 500);
+            $tags->add($existingTag);
         }
+
+        $recipe = new Recipe(
+            $request->getName(),
+            $request->getIngredients(),
+            $request->getInstructions(),
+            $tags
+        );
+
+        $this->recipeService->addRecipe($recipe);
 
         return new JsonResponse();
     }
