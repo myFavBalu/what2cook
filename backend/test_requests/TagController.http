@@ -1,3 +1,9 @@
 ### find Tags by Name
 GET {{uri}}/api/find-tags-by-name?searchName=veg
 Accept: application/json
+
+### find all Tags
+GET {{uri}}/api/get_all_tags
+Accept: application/json
+
+

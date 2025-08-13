@@ -6,6 +6,7 @@ use App\DTO\IdToNameDTO;
 use App\Entity\Recipe;
 use App\Entity\Tag;
 use App\Request\AddRecipeRequest;
+use App\Request\GetRecipeNamesWithIdRequest;
 use App\Service\RecipeService;
 use App\Service\TagService;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -13,6 +14,7 @@ use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Attribute\MapQueryString;
 use Symfony\Component\HttpKernel\Attribute\MapRequestPayload;
 
 
@@ -36,7 +38,7 @@ class RecipeController extends AbstractController
         return new JsonResponse($randomRecipe->jsonSerialize());
     }
 
-    public function getRecipeNamesWithId(): JsonResponse
+    public function getRecipeNamesWithId(#[MapQueryString] ?GetRecipeNamesWithIdRequest $request): JsonResponse
     {
         try {
             /**
@@ -49,7 +51,7 @@ class RecipeController extends AbstractController
                     $idToName = new IdToNameDTO($recipeId, $recipeName);
                     return $idToName->jsonSerialize();
                 },
-                $this->recipeService->getAllRecipes()
+                $this->recipeService->getAllRecipes($request?->getFilterTags() ?? [])
             );
         } catch (Exception $e) {
             return new JsonResponse($e);

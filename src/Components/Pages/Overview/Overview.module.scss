@@ -1,25 +1,52 @@
 @import "../../../variables";
 
-.OverviewContainer {
-  color: $color-headline;
-  border: 2px solid $color-border;
-  border-radius: 5px;
-  background-color: $color-component;
-  margin: 20px 5% 85px 5%;
-  padding: 5px;
+.OverviewWrapper {
   display: flex;
   flex-direction: column;
+  gap: 10px;
+  margin: 20px 5%;
 
-  a {
+  .Filter {
     color: $color-headline;
-    text-decoration: none;
-    font-size: 18px;
+    font-size: $font-size-medium;
   }
 
+  .TagsContainer {
+    display: flex;
+    padding: 5px 0;
+    gap: 10px;
 
-  :not(:last-child) {
-    border-bottom: 1px solid $color-border;
-    padding-bottom: 5px;
-    margin-bottom: 5px;
+    .Tag {
+      font-size: $font-size-medium;
+      border: 1px solid $color-border;
+      border-radius: 5px;
+      padding: 2px 4px;
+      background-color: $color-component;
+      color: $color-headline;
+      cursor: pointer;
+    }
+  }
+
+  .RecipeContainer {
+    color: $color-headline;
+    border: 2px solid $color-border;
+    border-radius: 5px;
+    background-color: $color-component;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+
+    a {
+      color: $color-headline;
+      text-decoration: none;
+      font-size: 18px;
+    }
+
+
+    :not(:last-child) {
+      border-bottom: 1px solid $color-border;
+      padding-bottom: 5px;
+      margin-bottom: 5px;
+    }
   }
 }

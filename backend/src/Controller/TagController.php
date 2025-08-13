@@ -32,4 +32,16 @@ class TagController
 
         return new JsonResponse($responseBody);
     }
+
+    public function getAllTags()
+    {
+        $results = $this->tagService->getAllTags();
+        $responseBody = [];
+
+        foreach ($results as $tag) {
+            $responseBody[] = $tag->jsonSerialize();
+        }
+
+        return new JsonResponse($responseBody);
+    }
 }

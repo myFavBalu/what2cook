@@ -25,3 +25,11 @@ Accept: application/json
 ### find Recipe by id
 GET {{uri}}/api/find-by-id?recipeId=2
 Accept: application/json
+
+### all Recipes with id
+GET {{uri}}/api/all-names-with-id
+Accept: application/json
+
+### all Recipes with id filtered
+GET {{uri}}/api/all-names-with-id?filterTags[]=vegan&filterTags[]=vegetarisch
+Accept: application/json

@@ -15,8 +15,6 @@ class RecipeService
     }
 
     /**
-     * @throws NonUniqueResultException
-     * @throws NoResultException
      * @throws Exception
      */
     public function getRandomRecipe(int $currentRecipeId): Recipe
@@ -33,11 +31,12 @@ class RecipeService
     }
 
     /**
+     * @param string[] $tagNames
      * @return array<Recipe>
      */
-    public function getAllRecipes(): array
+    public function getAllRecipes(array $tagNames): array
     {
-       return $this->recipeRepository->getAllRecipes();
+       return $this->recipeRepository->getAllRecipes($tagNames);
     }
 
     /**

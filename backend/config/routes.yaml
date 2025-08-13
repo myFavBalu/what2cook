@@ -31,3 +31,8 @@ find_tag_by_name:
     path: /api/find-tags-by-name
     methods: GET
     controller: App\Controller\TagController::findTagsByName
+
+get_all_tags:
+  path: /api/get_all_tags
+  methods: GET
+  controller: App\Controller\TagController::getAllTags

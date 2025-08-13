@@ -56,19 +56,23 @@ class RecipeRepository extends ServiceEntityRepository
     }
 
     /**
+     * @param string[] $tagNames
      * @return Recipe[]
      */
-    public function getAllRecipes(): array
+    public function getAllRecipes(array $tagNames): array
     {
-        $qb = $this->createQueryBuilder('recipe');
+        $qb = $this->createQueryBuilder('recipe')
+            ->select('DISTINCT recipe')
+            ->leftJoin('recipe.tags', 'tag')
+            ->addSelect('tag')
+            ->orderBy('recipe.name', 'ASC');
 
-        /**
-         * @var Recipe[] $listOfRecipes
-         */
-        return $qb
-            ->orderBy('recipe.name')
-            ->getQuery()
-            ->getResult();
+        if (!empty($tagNames)) {
+            $qb->andWhere('tag.name IN (:tagNames)')
+                ->setParameter('tagNames', $tagNames);
+        }
+
+        return $qb->getQuery()->getResult();
     }
 
     /**
