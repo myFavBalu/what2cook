@@ -12,22 +12,21 @@
     text-align: center;
     border-bottom: 2px solid $color-border;
 
-    .VeggieIcon, .NoVeggieIcon {
-      display: inline;
-      float: right;
-      padding: 0 5px;
-    }
+    .TagContainer {
+      display: flex;
+      justify-content: center;
+      padding: 5px 0;
+      gap: 5px;
 
-    .NoVeggieIcon {
-      color: $color-no-veggie;
-      text-decoration: line-through;
-      text-decoration-color: $color-black;
-    }
-
-    .VeggieIcon {
-      color: $color-veggie;
+      .Tag {
+        font-size: $font-size-medium;
+        border: 1px solid $color-border;
+        border-radius: 5px;
+        padding: 2px 4px;
+      }
     }
   }
+
 
   .RecipeIngredients {
     border-bottom: 2px solid $color-border;

@@ -6,23 +6,36 @@ type DisplayProps = {
     recipe: Recipe
 }
 
-export function Display(props: DisplayProps) {
-    const ingredients = props.recipe.ingredients.split("-");
-    const displayIngredients: Array<JSX.Element> = [];
-    ingredients.forEach((i) => displayIngredients.push(<div className={s.IngredientItem} key={i}>{i}</div>));
+export function Display({recipe}: DisplayProps) {
+    const ingredients = recipe.ingredients.split("-");
+
+    const displayIngredients = ingredients.map(
+        (i) =>
+            <div
+                className={s.IngredientItem}
+                key={i}>
+                {i}
+            </div>);
+    const displayTags = recipe.tags.map(
+        (tag) =>
+            <div
+                className={s.Tag}
+                key={tag.id}>
+                {tag.name}
+            </div>);
 
     return <div className={s.RecipeForm}>
         <div className={s.RecipeName}>
-            {props.recipe.name}
-            <div
-                className={props.recipe.tags.some((tag) => tag.name === "vegetarisch") ? s.VeggieIcon : s.NoVeggieIcon}>V
+            {recipe.name}
+            <div className={s.TagContainer}>
+                {displayTags}
             </div>
         </div>
         <div className={s.RecipeIngredients}>
             {displayIngredients}
         </div>
         <div className={s.RecipeInstructions}>
-            {props.recipe.instructions}
+            {recipe.instructions}
         </div>
     </div>
 }
