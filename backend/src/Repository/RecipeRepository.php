@@ -62,14 +62,17 @@ class RecipeRepository extends ServiceEntityRepository
     public function getAllRecipes(array $tagNames): array
     {
         $qb = $this->createQueryBuilder('recipe')
-            ->select('DISTINCT recipe')
+            ->select('recipe')
             ->leftJoin('recipe.tags', 'tag')
             ->addSelect('tag')
             ->orderBy('recipe.name', 'ASC');
 
         if (!empty($tagNames)) {
             $qb->andWhere('tag.name IN (:tagNames)')
-                ->setParameter('tagNames', $tagNames);
+                ->setParameter('tagNames', $tagNames)
+                ->groupBy('recipe.id')
+                ->having('COUNT(DISTINCT tag.id) = :tagCount')
+                ->setParameter('tagCount', count($tagNames));
         }
 
         return $qb->getQuery()->getResult();

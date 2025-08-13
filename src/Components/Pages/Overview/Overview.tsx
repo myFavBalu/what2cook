@@ -18,10 +18,6 @@ export function Overview(): JSX.Element {
         })
     }, [filterTags])
 
-    if (recipePlaceholders.length === 0) {
-        return <></>;
-    }
-
     return <div className={s.OverviewWrapper}>
         <span className={s.Filter}>Filter:</span>
         <div className={s.TagsContainer}>
@@ -46,13 +42,13 @@ export function Overview(): JSX.Element {
             })}
         </div>
 
-        <div className={s.RecipeContainer}>
+        {recipePlaceholders.length > 0 && <div className={s.RecipeContainer}>
             {recipePlaceholders.map((placeholder) =>
                 <a className={s.OverviewElement}
                    key={placeholder.id}
                    href={"/generate?recipeId=" + placeholder.id}
                 >{placeholder.name}</a>)
             }
-        </div>
+        </div>}
     </div>;
 }
