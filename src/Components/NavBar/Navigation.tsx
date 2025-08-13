@@ -1,8 +1,11 @@
 import s from "./Navigation.module.scss"
-import {NavLink} from "react-router-dom";
+import {NavLink, useNavigate} from "react-router-dom";
 import {SearchBarWithRecommendations} from "../SearchBar/SearchBarWithRecommendations";
+import {getRecipeIdByName} from "../../ApiCalls/Get/getRecipeIdByName";
 
 export function Navigation(): JSX.Element {
+    const navigation = useNavigate()
+
     return <div className={s.NavigationWrapper}>
         <NavLink className={s.PageName} to={"/"}>what2cook</NavLink>
         <div className={s.ScrollablePageContainer}>
@@ -11,7 +14,13 @@ export function Navigation(): JSX.Element {
             <NavLink className={s.NavigationElement} to={"/create"}>Rezept anlegen</NavLink>
         </div>
         <div className={s.NavigationSearchBarWrapper}>
-            <SearchBarWithRecommendations/>
+            <SearchBarWithRecommendations
+                onResultClicked={(searchResult) => navigation({
+                    pathname: "/generate",
+                    search: "?recipeId=" + searchResult.id
+                })}
+                getCall={getRecipeIdByName}
+            />
         </div>
     </div>
 }

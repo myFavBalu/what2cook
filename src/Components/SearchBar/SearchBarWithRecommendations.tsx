@@ -1,14 +1,20 @@
 import {useEffect, useState} from "react";
 import s from "./SearchBarWithRecommendations.module.scss"
-import {MealSearchResult} from "../../Types/MealTypes";
-import {useNavigate} from "react-router-dom";
-import {getMealIdByName} from "../../ApiCalls/getMealIdByName";
+import {SearchResult} from "../../Types/RecipeTypes";
 
 
-export function SearchBarWithRecommendations(): JSX.Element {
+export type SearchBarWithRecommendationsProps = {
+    getCall: (searchWord: string) => Promise<SearchResult[]>,
+    onResultClicked: (value: SearchResult) => void
+}
+
+export function SearchBarWithRecommendations({
+                                                 getCall,
+                                                 onResultClicked
+                                             }: SearchBarWithRecommendationsProps): JSX.Element {
     const [isFirstRender, setIsFirstRender] = useState(true)
     const [searchTerm, setSearchTerm] = useState<string>("Suche...")
-    const [possibleResults, setPossibleResults] = useState<Array<MealSearchResult>>([])
+    const [possibleResults, setPossibleResults] = useState<Array<SearchResult>>([])
 
     useEffect(() => {
         if (!isFirstRender) {
@@ -16,7 +22,7 @@ export function SearchBarWithRecommendations(): JSX.Element {
                 setPossibleResults([])
             } else {
                 const delayDebounceFn = setTimeout(() => {
-                    getMealIdByName(searchTerm).then(setPossibleResults)
+                    getCall(searchTerm).then(setPossibleResults)
                 }, 500)
 
                 return () => clearTimeout(delayDebounceFn)
@@ -24,7 +30,7 @@ export function SearchBarWithRecommendations(): JSX.Element {
         } else setIsFirstRender(false)
     }, [searchTerm])
 
-    return <>
+    return <div className={s.SearchBarWrapper}>
         <input name={"SearchBar"} className={s.SearchBar} value={searchTerm} onFocus={(event) => {
             if (event.target.value === "Suche...") {
                 setSearchTerm("")
@@ -32,27 +38,28 @@ export function SearchBarWithRecommendations(): JSX.Element {
         }} onChange={(e) => setSearchTerm(e.target.value)}/>
         {possibleResults.length > 0 &&
             <SearchResultContainer possibleResults={possibleResults}
+                                   onResultClicked={onResultClicked}
                                    resetSearchTerm={() => setSearchTerm("Suche...")}/>}
-    </>
+    </div>
 }
 
 
 type SearchResultContainerProps = {
-    possibleResults: Array<MealSearchResult>,
+    possibleResults: Array<SearchResult>,
+    onResultClicked: (value: SearchResult) => void
     resetSearchTerm: () => void
 }
 
-function SearchResultContainer(props: SearchResultContainerProps) {
+function SearchResultContainer({possibleResults, onResultClicked, resetSearchTerm}: SearchResultContainerProps) {
     const containerArray: Array<JSX.Element> = [];
-    const navigation = useNavigate()
 
-    props.possibleResults.forEach((result, index) => {
+    possibleResults.forEach((result, index) => {
         containerArray.push(
             <div className={s.SearchResultItem}
                  key={index}
                  onClick={() => {
-                     props.resetSearchTerm()
-                     navigation({pathname: "/generate", search: "?recipeId=" + result.id})
+                     resetSearchTerm()
+                     onResultClicked(result)
                  }}
             >
                 {result.name}
