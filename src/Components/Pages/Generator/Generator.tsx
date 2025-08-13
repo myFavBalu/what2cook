@@ -1,31 +1,31 @@
-import {Meal} from "../../../Types/MealTypes";
+import {Recipe} from "../../../Types/RecipeTypes";
 import React, {useEffect, useState} from "react";
 import s from "./Generator.module.scss";
 import {Display} from "../../Display/Display";
 import {useSearchParams} from "react-router-dom";
-import {getMealById} from "../../../ApiCalls/getMealById";
-import {getRandomMeal} from "../../../ApiCalls/getRandomMeal";
+import {getRecipeById} from "../../../ApiCalls/Get/getRecipeById";
+import {getRandomRecipe} from "../../../ApiCalls/Get/getRandomRecipe";
 
 export function Generator(): JSX.Element {
-    const [meal, setMeal] = useState<Meal | null>(null);
+    const [recipe, setRecipe] = useState<Recipe | null>(null);
     const [queryParams] = useSearchParams();
 
     useEffect(() => {
         const recipeId = queryParams.get("recipeId")
         if (recipeId) {
-            getMealById(parseInt(recipeId)).then((newMeal) => setMeal(newMeal))
+            getRecipeById(parseInt(recipeId)).then((newRecipe) => setRecipe(newRecipe))
         } else {
-            getRandomMeal(null).then((newMeal) => setMeal(newMeal))
+            getRandomRecipe(null).then((newRecipe) => setRecipe(newRecipe))
         }
     }, [queryParams])
 
 
-    if (meal === null) {
+    if (recipe === null) {
         return <></>
     } else {
         return <>
-            <Display meal={meal}/>
-            <button className={s.Reroll} onClick={() => getRandomMeal(meal).then(setMeal)}>Etwas anderes!</button>
+            <Display recipe={recipe}/>
+            <button className={s.Reroll} onClick={() => getRandomRecipe(recipe).then(setRecipe)}>Etwas anderes!</button>
         </>
     }
 }

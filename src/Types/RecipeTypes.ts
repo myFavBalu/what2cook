@@ -1,4 +1,4 @@
-export type Meal = {
+export type Recipe = {
     id: number,
     name: string,
     ingredients: string,
@@ -11,14 +11,18 @@ export type Tag = {
     name: string,
 }
 
-export type MealCreation = {
+export type RecipeCreation = {
     name: string,
     ingredients: string[],
     instructions: string,
     vegetarian: boolean,
 }
 
-export type MealSearchResult = {
+export interface SearchResult {
     id: number,
     name: string
 }
+
+export type RecipeSearchResult = SearchResult
+
+export type TagSearchResult = SearchResult

@@ -1,11 +1,12 @@
 import React, {useState} from "react";
-import {MealCreation} from "../../../Types/MealTypes";
+import {RecipeCreation} from "../../../Types/RecipeTypes";
 import s from "./AddRecipe.module.scss";
 import {toast} from 'react-toastify';
 import {useNavigate} from "react-router-dom";
+import {addRecipe} from "../../../ApiCalls/Post/addRecipe";
 
 export function AddRecipe(): JSX.Element {
-    const [newMeal, setNewMeal] = useState<MealCreation>({
+    const [newRecipe, setNewRecipe] = useState<RecipeCreation>({
         name: "Name",
         ingredients: [],
         instructions: "",
@@ -14,37 +15,36 @@ export function AddRecipe(): JSX.Element {
     const navigation = useNavigate()
 
 
-    return <div className={s.MealCreationForm}>
+    return <div className={s.RecipeCreationForm}>
         <NameInput
-            name={newMeal.name}
+            name={newRecipe.name}
             setName={(newName) => {
-                setNewMeal({...newMeal, name: newName})
+                setNewRecipe({...newRecipe, name: newName})
             }}
         />
-
         <IngredientList
-            ingredients={newMeal.ingredients}
+            ingredients={newRecipe.ingredients}
             setIngredients={(ingredients: string[]) => {
-                setNewMeal({...newMeal, ingredients: ingredients})
+                setNewRecipe({...newRecipe, ingredients: ingredients})
             }}
             addNewIngredient={() => {
-                let newIngredients = newMeal.ingredients;
+                let newIngredients = newRecipe.ingredients;
                 newIngredients.push("");
-                setNewMeal({...newMeal, ingredients: newIngredients})
+                setNewRecipe({...newRecipe, ingredients: newIngredients})
             }}/>
 
-        <Instructions instructions={newMeal.instructions} setInstructions={(newInstructions: string) => setNewMeal({
-            ...newMeal,
+        <Instructions instructions={newRecipe.instructions} setInstructions={(newInstructions: string) => setNewRecipe({
+            ...newRecipe,
             instructions: newInstructions
         })}/>
 
-        <Preferences isVegetarian={newMeal.vegetarian} toggleIsVegetarian={() => {
-            setNewMeal({...newMeal, vegetarian: !newMeal.vegetarian})
+        <Preferences isVegetarian={newRecipe.vegetarian} toggleIsVegetarian={() => {
+            setNewRecipe({...newRecipe, vegetarian: !newRecipe.vegetarian})
         }}/>
 
         <button className={s.SavingButton}
                 onClick={
-                    () => addMeal(newMeal, () => navigation({pathname: "/"}))
+                    () => handleCall(newRecipe, () => navigation({pathname: "/"}))
                 }>
             Speichern
         </button>
@@ -150,23 +150,9 @@ function Preferences(props: PreferencesProps) {
     </div>
 }
 
-async function addMeal(newMeal: MealCreation, onSuccess: () => void) {
+async function handleCall(newRecipe: RecipeCreation, onSuccess: () => void) {
     try {
-        const url = '/api/add-recipe';
-        const requestOptions = {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            // todo: just work with newMeal directly if possible (conversion to Meal?)
-            body: JSON.stringify({
-                name: newMeal.name,
-                ingredients: "- " + newMeal.ingredients.join("- "),
-                instructions: newMeal.instructions,
-                // TODO: proper implementation of tags for the frontend, needs ui in this component and similar logic to searchbar regarding suggestions
-                tags: newMeal.vegetarian ? ['vegetarisch'] : []
-            })
-        };
-        console.log(requestOptions)
-        await fetch(url, requestOptions).then(
+        addRecipe(newRecipe).then(
             (value) => {
                 if (value.ok) {
                     toast.success("Gespeichert! :-)", {onClose: () => onSuccess()})

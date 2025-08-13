@@ -1,23 +1,23 @@
-import {MealSearchResult} from "../../../Types/MealTypes";
+import {RecipeSearchResult} from "../../../Types/RecipeTypes";
 import React, {useEffect, useState} from "react";
 import s from "./Overview.module.scss"
-import {getMealNamesWithIds} from "../../../ApiCalls/getMealNamesWithIds";
+import {getRecipeNamesWithIds} from "../../../ApiCalls/Get/getRecipeNamesWithIds";
 
 export function Overview(): JSX.Element {
-    const [mealPlaceholders, setMealPlaceholders] = useState<MealSearchResult[]>([]);
+    const [recipePlaceholders, setRecipePlaceholders] = useState<RecipeSearchResult[]>([]);
 
     useEffect(() => {
-        getMealNamesWithIds().then((mealPlaceholders) => {
-            setMealPlaceholders(mealPlaceholders)
+        getRecipeNamesWithIds().then((recipePlaceholders) => {
+            setRecipePlaceholders(recipePlaceholders)
         })
     }, [])
 
-    if (mealPlaceholders.length === 0) {
+    if (recipePlaceholders.length === 0) {
         return <></>;
     }
 
     return <div className={s.OverviewContainer}>
-        {mealPlaceholders.map((placeholder) =>
+        {recipePlaceholders.map((placeholder) =>
             <a className={s.OverviewElement}
                key={placeholder.id}
                href={"/generate?recipeId=" + placeholder.id}

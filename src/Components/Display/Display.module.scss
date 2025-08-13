@@ -1,13 +1,13 @@
 @import "../../variables";
 
-.MealForm {
+.RecipeForm {
   color: $color-headline;
   border: 2px solid $color-border;
   border-radius: 5px;
   background-color: $color-component;
   margin: 20px 5% 85px 5%;
 
-  .MealName {
+  .RecipeName {
     font-size: 22px;
     text-align: center;
     border-bottom: 2px solid $color-border;
@@ -29,7 +29,7 @@
     }
   }
 
-  .MealIngredients {
+  .RecipeIngredients {
     border-bottom: 2px solid $color-border;
 
     .IngredientItem {
@@ -37,7 +37,7 @@
     }
   }
 
-  .MealInstructions {
+  .RecipeInstructions {
     margin: 5px;
     white-space: break-spaces;
   }
