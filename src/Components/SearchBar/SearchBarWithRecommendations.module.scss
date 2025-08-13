@@ -29,10 +29,13 @@
       border-bottom: 1px solid $color-border;
       cursor: pointer;
       padding: 5px 0 5px 5px;
+    }
 
-      &:last-child {
-        border: none;
-      }
+    .SearchBarAddResult {
+      width: 100%;
+      cursor: pointer;
+      padding: 5px 0 5px 5px;
+      font-style: italic;
     }
   }
 }

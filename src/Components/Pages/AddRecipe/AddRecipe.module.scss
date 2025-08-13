@@ -18,10 +18,12 @@ Input, textarea {
   background-color: $color-component;
   margin: 20px 5% 85px 5%;
   padding: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 
   .NameInputWrapper {
     padding-bottom: 10px;
-    margin-top: 10px;
     border-bottom: solid 2px $color-border;
 
     .NameInput {
@@ -33,7 +35,6 @@ Input, textarea {
 
 
   .IngredientList {
-    margin-top: 10px;
     padding-bottom: 10px;
     border-bottom: 2px solid $color-border;
     font-size: $font-size-medium;
@@ -84,7 +85,6 @@ Input, textarea {
   }
 
   .InstructionWrapper {
-    margin-top: 10px;
     border-bottom: 2px solid $color-border;
     font-size: $font-size-medium;
 
@@ -94,22 +94,6 @@ Input, textarea {
       padding: 0 0 5px 20px;
     }
   }
-
-  .PreferencesWrapper {
-    margin-top: 10px;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-
-    .PreferencesSelect {
-      cursor: pointer;
-      background-color: unset;
-      border: none;
-      color: $color-headline;
-      font-weight: bold;
-    }
-  }
-
 }
 
 .SavingButton {

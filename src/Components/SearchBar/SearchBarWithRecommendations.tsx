@@ -5,12 +5,14 @@ import {SearchResult} from "../../Types/RecipeTypes";
 
 export type SearchBarWithRecommendationsProps = {
     getCall: (searchWord: string) => Promise<SearchResult[]>,
-    onResultClicked: (value: SearchResult) => void
+    onResultClicked: (value: SearchResult) => void,
+    onAddResultClicked: (currentSearchWord: string) => void
 }
 
 export function SearchBarWithRecommendations({
                                                  getCall,
-                                                 onResultClicked
+                                                 onResultClicked,
+                                                 onAddResultClicked
                                              }: SearchBarWithRecommendationsProps): JSX.Element {
     const [isFirstRender, setIsFirstRender] = useState(true)
     const [searchTerm, setSearchTerm] = useState<string>("Suche...")
@@ -36,10 +38,20 @@ export function SearchBarWithRecommendations({
                 setSearchTerm("")
             }
         }} onChange={(e) => setSearchTerm(e.target.value)}/>
-        {possibleResults.length > 0 &&
+        {searchTerm !== "" && searchTerm !== 'Suche...' &&
             <SearchResultContainer possibleResults={possibleResults}
-                                   onResultClicked={onResultClicked}
-                                   resetSearchTerm={() => setSearchTerm("Suche...")}/>}
+                                   onResultClicked={(result) => {
+                                       setPossibleResults([])
+                                       setSearchTerm("Suche...")
+                                       onResultClicked(result)
+                                   }}
+                                   onAddResultClicked={() => {
+                                       setPossibleResults([])
+                                       setSearchTerm("Suche...")
+                                       onAddResultClicked(searchTerm)
+                                   }}
+            />
+        }
     </div>
 }
 
@@ -47,10 +59,10 @@ export function SearchBarWithRecommendations({
 type SearchResultContainerProps = {
     possibleResults: Array<SearchResult>,
     onResultClicked: (value: SearchResult) => void
-    resetSearchTerm: () => void
+    onAddResultClicked: () => void
 }
 
-function SearchResultContainer({possibleResults, onResultClicked, resetSearchTerm}: SearchResultContainerProps) {
+function SearchResultContainer({possibleResults, onResultClicked, onAddResultClicked}: SearchResultContainerProps) {
     const containerArray: Array<JSX.Element> = [];
 
     possibleResults.forEach((result, index) => {
@@ -58,13 +70,21 @@ function SearchResultContainer({possibleResults, onResultClicked, resetSearchTer
             <div className={s.SearchResultItem}
                  key={index}
                  onClick={() => {
-                     resetSearchTerm()
                      onResultClicked(result)
                  }}
             >
                 {result.name}
             </div>)
     })
+
+    containerArray.push(<div className={s.SearchBarAddResult}
+                             key={'addResultItem'}
+                             onClick={() => {
+                                 onAddResultClicked()
+                             }}
+    >
+        Neu hinzufügen
+    </div>)
 
     return <div className={s.SearchResultContainer}>
         {containerArray}

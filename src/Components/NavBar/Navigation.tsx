@@ -20,6 +20,7 @@ export function Navigation(): JSX.Element {
                     search: "?recipeId=" + searchResult.id
                 })}
                 getCall={getRecipeIdByName}
+                onAddResultClicked={()=>navigation({pathname: '/create'})}
             />
         </div>
     </div>

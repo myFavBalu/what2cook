@@ -15,7 +15,7 @@ export type RecipeCreation = {
     name: string,
     ingredients: string[],
     instructions: string,
-    vegetarian: boolean,
+    tags: Tag[],
 }
 
 export interface SearchResult {

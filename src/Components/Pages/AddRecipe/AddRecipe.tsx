@@ -1,19 +1,19 @@
-import React, {useState} from "react";
-import {RecipeCreation} from "../../../Types/RecipeTypes";
+import React, {ReactElement, useState} from "react";
+import {RecipeCreation, Tag} from "../../../Types/RecipeTypes";
 import s from "./AddRecipe.module.scss";
 import {toast} from 'react-toastify';
 import {useNavigate} from "react-router-dom";
 import {addRecipe} from "../../../ApiCalls/Post/addRecipe";
+import {TagSelection} from "./TagSelection";
 
-export function AddRecipe(): JSX.Element {
+export function AddRecipe(): ReactElement {
     const [newRecipe, setNewRecipe] = useState<RecipeCreation>({
         name: "Name",
         ingredients: [],
         instructions: "",
-        vegetarian: true
+        tags: []
     })
     const navigation = useNavigate()
-
 
     return <div className={s.RecipeCreationForm}>
         <NameInput
@@ -38,8 +38,13 @@ export function AddRecipe(): JSX.Element {
             instructions: newInstructions
         })}/>
 
-        <Preferences isVegetarian={newRecipe.vegetarian} toggleIsVegetarian={() => {
-            setNewRecipe({...newRecipe, vegetarian: !newRecipe.vegetarian})
+        <TagSelection tags={newRecipe.tags} setTags={(tags: Tag[]) => {
+            const uniqueTags = tags.filter(
+                (tag, index, self) =>
+                    index === self.findIndex((t) => t.id === tag.id)
+            );
+
+            setNewRecipe({...newRecipe, tags: uniqueTags})
         }}/>
 
         <button className={s.SavingButton}
@@ -126,27 +131,6 @@ function Instructions(props: InstructionProps) {
         <textarea rows={10} className={s.InstructionInput}
                   value={props.instructions}
                   onChange={(event) => props.setInstructions(event.target.value)}/>
-    </div>
-}
-
-
-type PreferencesProps = {
-    isVegetarian: boolean,
-    toggleIsVegetarian: () => void
-}
-
-function Preferences(props: PreferencesProps) {
-    return <div className={s.PreferencesWrapper}>
-        Ernährungsweise:
-        <select className={s.PreferencesSelect} defaultValue={props.isVegetarian ? "veggie" : "omni"}
-                onChange={props.toggleIsVegetarian}>
-            <option value={"veggie"}>
-                vegetarisch
-            </option>
-            <option value={"omni"}>
-                omni
-            </option>
-        </select>
     </div>
 }
 

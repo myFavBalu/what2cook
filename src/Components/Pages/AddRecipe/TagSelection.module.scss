@@ -1,0 +1,32 @@
+@import "../../../variables";
+
+.TagSelectionWrapper {
+  font-size: $font-size-medium;
+
+  ul {
+    list-style-position: inside;
+    padding: 5px 0 0 0;
+  }
+
+  .ActiveTag {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    gap: 5px;
+    margin: 5px 0 5px 0;
+
+    .DeleteButton {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+      background-color: $color-border;
+      border-color: $color-border;
+      font-size: 14px;
+      height: 1.25em;
+      width: 1.25em;
+      cursor: pointer;
+      color: $color-delete;
+    }
+  }
+}
