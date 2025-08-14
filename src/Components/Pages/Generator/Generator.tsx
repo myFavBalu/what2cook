@@ -1,6 +1,5 @@
 import {Recipe} from "../../../Types/RecipeTypes";
 import React, {useEffect, useState} from "react";
-import s from "./Generator.module.scss";
 import {RecipeUI} from "../../RecipeUI/RecipeUI";
 import {useSearchParams} from "react-router-dom";
 import {getRecipeById} from "../../../ApiCalls/Get/getRecipeById";
