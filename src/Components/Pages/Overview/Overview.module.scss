@@ -7,7 +7,7 @@
   margin: 20px 5%;
 
   .Filter {
-    color: $color-headline;
+    color: $color-text;
     font-size: $font-size-medium;
   }
 
@@ -23,13 +23,13 @@
       border-radius: 5px;
       padding: 2px 4px;
       background-color: $color-component;
-      color: $color-headline;
+      color: $color-text;
       cursor: pointer;
     }
   }
 
   .RecipeContainer {
-    color: $color-headline;
+    color: $color-text;
     border: 2px solid $color-border;
     border-radius: 5px;
     background-color: $color-component;
@@ -38,7 +38,7 @@
     flex-direction: column;
 
     a {
-      color: $color-headline;
+      color: $color-text;
       text-decoration: none;
       font-size: 18px;
     }

@@ -1,7 +1,7 @@
 @import "../../variables";
 
 .NavigationWrapper {
-  background: $color-component;
+  background: $color-navbar;
   display: flex;
   height: 50px;
   padding: 0 25px;
@@ -9,9 +9,10 @@
   border-bottom-right-radius: 10px;
   user-select: none;
   position: sticky;
+  z-index: 1;
   top: 0;
   align-items: center;
-  filter: drop-shadow(1px 1px 3px color-mix(in srgb, $color-background 75%, #000));
+  filter: drop-shadow(5px 5px 5px color-mix(in srgb, $color-backdrop 75%, #000));
 
 
   .PageName {

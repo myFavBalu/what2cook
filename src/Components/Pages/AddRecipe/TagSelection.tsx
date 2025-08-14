@@ -13,6 +13,7 @@ export function TagSelection({tags, setTags}: TagSelectionProps): ReactElement {
     return <div className={s.TagSelectionWrapper}>
         Tags:
         <SearchBarWithRecommendations
+            className={s.TagSelectionSearchBar}
             getCall={getTagsByName}
             onResultClicked={(result) => {
                 setTags([...tags, result as Tag])

@@ -1,15 +1,18 @@
 import {useEffect, useState} from "react";
 import s from "./SearchBarWithRecommendations.module.scss"
 import {SearchResult} from "../../Types/RecipeTypes";
+import clsx from "clsx";
 
 
 export type SearchBarWithRecommendationsProps = {
+    className?: string,
     getCall: (searchWord: string) => Promise<SearchResult[]>,
     onResultClicked: (value: SearchResult) => void,
     onAddResultClicked: (currentSearchWord: string) => void
 }
 
 export function SearchBarWithRecommendations({
+                                                 className,
                                                  getCall,
                                                  onResultClicked,
                                                  onAddResultClicked
@@ -32,7 +35,7 @@ export function SearchBarWithRecommendations({
         } else setIsFirstRender(false)
     }, [searchTerm])
 
-    return <div className={s.SearchBarWrapper}>
+    return <div className={clsx(s.SearchBarWrapper, className)}>
         <input name={"SearchBar"} className={s.SearchBar} value={searchTerm} onFocus={(event) => {
             if (event.target.value === "Suche...") {
                 setSearchTerm("")

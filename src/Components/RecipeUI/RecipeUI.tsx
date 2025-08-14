@@ -1,12 +1,12 @@
 import React from "react";
 import {Recipe} from "../../Types/RecipeTypes";
-import s from "./Display.module.scss"
+import s from "./RecipeUI.module.scss"
 
 type DisplayProps = {
     recipe: Recipe
 }
 
-export function Display({recipe}: DisplayProps) {
+export function RecipeUI({recipe}: DisplayProps) {
     const ingredients = recipe.ingredients.split("-");
 
     return <div className={s.RecipeForm}>

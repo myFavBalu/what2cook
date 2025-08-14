@@ -1,11 +1,12 @@
 @import "../../variables";
 
 .RecipeForm {
-  color: $color-headline;
+  color: $color-text;
   border: 2px solid $color-border;
   border-radius: 5px;
   background-color: $color-component;
   margin: 20px 5% 85px 5%;
+  filter: drop-shadow(5px 5px 5px color-mix(in srgb, $color-backdrop 75%, #000));
 
   .RecipeName {
     font-size: 22px;

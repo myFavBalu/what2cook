@@ -3,7 +3,7 @@
 Input, textarea {
   border: none;
   background-color: $color-component;
-  color: $color-headline;
+  color: $color-text;
   width: 100%;
 
   &:focus {
@@ -12,7 +12,7 @@ Input, textarea {
 }
 
 .RecipeCreationForm {
-  color: $color-headline;
+  color: $color-text;
   border: 2px solid $color-border;
   border-radius: 5px;
   background-color: $color-component;
@@ -29,7 +29,7 @@ Input, textarea {
     .NameInput {
       text-align: center;
       font-size: $font-size-large;
-      text-decoration: underline $color-headline;
+      text-decoration: underline $color-text;
     }
   }
 
@@ -89,6 +89,7 @@ Input, textarea {
     font-size: $font-size-medium;
 
     .InstructionInput {
+      margin: 5px 0 0 0;
       resize: none;
       width: 90%;
       padding: 0 0 5px 20px;
@@ -101,7 +102,7 @@ Input, textarea {
   border-radius: 5px;
   background-color: $color-border;
   border-color: $color-border;
-  color: $color-headline;
+  color: $color-text;
   height: 30px;
   font-size: $font-size-large;
   min-width: 210px;

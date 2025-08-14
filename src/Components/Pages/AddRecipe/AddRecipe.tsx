@@ -5,6 +5,7 @@ import {toast} from 'react-toastify';
 import {useNavigate} from "react-router-dom";
 import {addRecipe} from "../../../ApiCalls/Post/addRecipe";
 import {TagSelection} from "./TagSelection";
+import {StickyButton} from "../../StickyButton/StickyButton";
 
 export function AddRecipe(): ReactElement {
     const [newRecipe, setNewRecipe] = useState<RecipeCreation>({
@@ -47,12 +48,12 @@ export function AddRecipe(): ReactElement {
             setNewRecipe({...newRecipe, tags: uniqueTags})
         }}/>
 
-        <button className={s.SavingButton}
-                onClick={
-                    () => handleCall(newRecipe, () => navigation({pathname: "/"}))
-                }>
+        <StickyButton
+            onClick={
+                () => handleCall(newRecipe, () => navigation({pathname: "/"}))
+            }>
             Speichern
-        </button>
+        </StickyButton>
     </div>
 }
 

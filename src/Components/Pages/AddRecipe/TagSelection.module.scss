@@ -2,10 +2,16 @@
 
 .TagSelectionWrapper {
   font-size: $font-size-medium;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+
+  .TagSelectionSearchBar {
+    z-index: auto;
+  }
 
   ul {
     list-style-position: inside;
-    padding: 5px 0 0 0;
   }
 
   .ActiveTag {

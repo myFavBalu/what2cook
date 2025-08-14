@@ -2,27 +2,33 @@
 
 .SearchBarWrapper {
   position: relative;
+  z-index: 2;
+  width: 100%;
 
   .SearchBar {
     border: 1px solid $color-border;
+    background-color: $color-component;
+    font-size: $font-size-medium;
     border-radius: 3px;
+    padding: 0 3px;
+    box-sizing: border-box;
   }
 
   .SearchResultContainer {
     position: absolute;
     height: fit-content;
-    color: $color-headline;
+    box-sizing: border-box;
+    width: 100%;
+    max-height: 200px;
+    color: $color-text;
     background-color: $color-component;
     border-left: 1px solid $color-border;
     border-right: 1px solid $color-border;
     border-bottom: 1px solid $color-border;
     border-bottom-left-radius: 3px;
     border-bottom-right-radius: 3px;
-    width: 100%;
-    max-height: 200px;
     overflow-x: clip;
     overflow-y: auto;
-
 
     .SearchResultItem {
       width: 100%;
